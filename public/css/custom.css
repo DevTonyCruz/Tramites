@@ -1,0 +1,9 @@
+.has-error {
+    border-color: #b94a48 !important;
+}
+
+.invalid-feedback {
+    margin: 0;
+    font-size: .95rem;
+    color: #fe195e;
+}
