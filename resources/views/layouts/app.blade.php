@@ -62,12 +62,15 @@
     <script src="{{ asset('assets/vendors/js/base/core.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/js/nicescroll/nicescroll.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/js/app/app.js') }}"></script>
+    <script src="{{ asset('assets/js/general/initial.js') }}"></script>
 
     @if (session('status'))
     <script type="text/javascript">
-            $(document).ready(function(){
-                $("#modal-form-errors").modal();
-            });
+        $(document).ready(function(){
+            $("#modal-form-errors").modal();
+        });
+
+
     </script>
     @endif
 

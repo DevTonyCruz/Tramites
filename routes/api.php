@@ -19,4 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'list'], function () {
     Route::get('users','UsersController@list')->name('users.list');
+    Route::get('gestion','GestionController@list')->name('gestion.list');
+    Route::get('remitente','RemitenteController@list')->name('remitente.list');
+    Route::get('estatus','EstatusController@list')->name('estatus.list');
 });

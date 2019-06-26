@@ -23,104 +23,104 @@
             </div>
             <div class="widget-body">
                 <form class="form-horizontal" method="POST" action="{{ url('users') }}">
+                    @csrf
                     <div class="form-group row d-flex align-items-center mb-5">
                         <label for="name" class="col-lg-3 form-control-label">Nombre</label>
                         <div class="col-lg-9">
                             <input type="text" id="name" name="name"
-                                    class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                    class="form-control{{ $errors->has('name') ? ' has-error' : '' }}"
                                     placeholder="Ingrese su nombre"
                                     value="{{ old('name') }}" required>
                             @if ($errors->has('name'))
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $errors->first('name') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
                     <div class="form-group row d-flex align-items-center mb-5">
-                        <label for="name" class="col-lg-3 form-control-label">Nombre</label>
-                        <div class="col-lg-9">
-                            <input type="text" id="name" name="name"
-                                    class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                    placeholder="Ingrese su nombre"
-                                    value="{{ old('name') }}" required>
-
-                            @if ($errors->has('name'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('name') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="form-group row d-flex align-items-center mb-5">
-                        <label for="first-last-name" class="col-lg-3 form-control-label">Apellido Paterno</label>
+                        <label for="first-last-name" class="col-lg-3 form-control-label">Apellido paterno</label>
                         <div class="col-lg-9">
                             <input type="text" id="first-last-name" name="first_last_name"
-                                    class="form-control{{ $errors->has('first_last_name') ? ' is-invalid' : '' }}"
+                                    class="form-control{{ $errors->has('first_last_name') ? ' has-error' : '' }}"
                                     placeholder="Ingrese su apellido paterno"
                                     value="{{ old('first_last_name') }}" required>
 
                             @if ($errors->has('first_last_name'))
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $errors->first('first_last_name') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
                     <div class="form-group row d-flex align-items-center mb-5">
-                        <label for=""second-last-name" class="col-lg-3 form-control-label">Nombre</label>
+                        <label for="second-last-name" class="col-lg-3 form-control-label">Apellido materno</label>
                         <div class="col-lg-9">
                             <input type="text" id="second-last-name" name="second_last_name"
-                                    class="form-control{{ $errors->has('second_last_name') ? ' is-invalid' : '' }}"
-                                    placeholder="Ingrese su nombre"
+                                    class="form-control{{ $errors->has('second_last_name') ? ' has-error' : '' }}"
+                                    placeholder="Ingrese su apellido materno"
                                     value="{{ old('second_last_name') }}" required>
                             @if ($errors->has('second_last_name'))
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $errors->first('second_last_name') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
                     <div class="form-group row d-flex align-items-center mb-5">
-                        <label for="name" class="col-lg-3 form-control-label">Nombre</label>
-                        <div class="col-lg-9">
-                            <input type="text" id="name" name="name"
-                                    class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                    placeholder="Ingrese su nombre"
-                                    value="{{ old('name') }}" required>
-                            @if ($errors->has('name'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('name') }}</strong>
+                        <label for="email" class="col-lg-3 form-control-label">Email</label>
+                        <div class="col-lg-9 input-group">
+                            <span class="input-group-addon addon-primary">
+                                <i class="la la-at"></i>
+                            </span>
+                            <input type="text" id="email" name="email"
+                                    class="form-control{{ $errors->has('email') ? ' has-error' : '' }}"
+                                    placeholder="Ingrese su email"
+                                    value="{{ old('email') }}" required>
+                            @if ($errors->has('email'))
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $errors->first('email') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
                     <div class="form-group row d-flex align-items-center mb-5">
-                        <label for="name" class="col-lg-3 form-control-label">Nombre</label>
-                        <div class="col-lg-9">
-                            <input type="text" id="name" name="name"
-                                    class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                    placeholder="Ingrese su nombre"
-                                    value="{{ old('name') }}" required>
-                            @if ($errors->has('name'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('name') }}</strong>
+                        <label for="phone" class="col-lg-3 form-control-label">Teléfono</label>
+                        <div class="col-lg-9 input-group">
+                            <span class="input-group-addon addon-primary">
+                                <i class="la la-phone"></i>
+                            </span>
+                            <input type="text" id="phone" name="phone"
+                                    class="form-control{{ $errors->has('phone') ? ' has-error' : '' }}"
+                                    placeholder="Ingrese su teléfono"
+                                    value="{{ old('phone') }}">
+                            @if ($errors->has('phone'))
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $errors->first('phone') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
                     <div class="form-group row d-flex align-items-center mb-5">
-                        <label for="name" class="col-lg-3 form-control-label">Nombre</label>
+                        <label for="password" class="col-lg-3 form-control-label">Contraseña</label>
                         <div class="col-lg-9">
-                            <input type="text" id="name" name="name"
-                                    class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                    placeholder="Ingrese su nombre"
-                                    value="{{ old('name') }}" required>
-                            @if ($errors->has('name'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('name') }}</strong>
+                            <input type="password" id="password" name="password"
+                                    class="form-control{{ $errors->has('password') ? ' has-error' : '' }}"
+                                    placeholder="Ingrese su contraseña"
+                                    value="{{ old('password') }}" required>
+                            @if ($errors->has('password'))
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $errors->first('password') }}</strong>
                                 </span>
                             @endif
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <label for="password-confirm" class="col-lg-3 form-control-label">Confirmar contraseña</label>
+                        <div class="col-lg-9">
+                            <input type="password" id="password-confirm" name="password_confirmation"
+                                    class="form-control"
+                                    placeholder="Confirme su contraseña" required>
                         </div>
                     </div>
 
@@ -134,13 +134,4 @@
         </div>
     </div>
 </div>
-<form method="POST" id="form_delete" class="inline" action="">
-    @method('DELETE')
-    @csrf
-</form>
-
-<form method="POST" id="form_update" class="inline" action="">
-    @method('PUT')
-    @csrf()
-</form>
 @endsection

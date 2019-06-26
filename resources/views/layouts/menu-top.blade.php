@@ -7,10 +7,10 @@
             <div class="navbar-header">
                 <a href="db-default.html" class="navbar-brand">
                     <div class="brand-image brand-big">
-                        <img src="assets/img/logo-big.png" alt="logo" class="logo-big">
+                        <img src="{{ asset('assets/img/logo-big.png') }}" alt="logo" class="logo-big">
                     </div>
                     <div class="brand-image brand-small">
-                        <img src="assets/img/logo.png" alt="logo" class="logo-small">
+                        <img src="{{ asset('assets/img/logo.png') }}" alt="logo" class="logo-small">
                     </div>
                 </a>
                 <!-- Toggle Button -->

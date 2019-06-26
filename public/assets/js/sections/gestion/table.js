@@ -7,8 +7,7 @@
         const columns = [
             { name: 'id', data: 'id' },
             { name: 'nombre', data: 'nombre' },
-            { name: 'email', data: 'email' },
-            { name: 'estatus', data: 'estatus' },
+            { name: 'descripcion', data: 'descripcion' },
             {
                 name: 'actions',
                 className: "td-actions",
@@ -74,7 +73,7 @@
             footer: true
         }];
 
-        $('#tramites-list').DataTable({
+        $('#gestion-list').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,

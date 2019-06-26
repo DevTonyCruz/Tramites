@@ -5,11 +5,11 @@
     <div class="row">
         <div class="page-header">
             <div class="d-flex align-items-center">
-                <h2 class="page-header-title">Tramites</h2>
+                <h2 class="page-header-title">Gestión</h2>
                 <div>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="db-default.html"><i class="ti ti-user"></i></a></li>
-                        <li class="breadcrumb-item"><a href="{{ url('/tramites') }}">Tramites</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('/gestion') }}">Gestión</a></li>
                         <li class="breadcrumb-item active">Listado</li>
                     </ul>
                 </div>
@@ -23,14 +23,12 @@
         </div>
         <div class="widget-body">
             <div class="table-responsive">
-                <table id="tramites-list" class="table mb-0">
+                <table id="gestion-list" class="table mb-0">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
-                            <th>Correo</th>
-                            <th>Teléfono</th>
-                            <th>Estatus</th>
+                            <th>descripcion</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -65,12 +63,12 @@
 <script src="{{ asset('assets/vendors/js/datatables/buttons.print.min.js') }}"></script>
 
 <script type="text/javascript">
-    let URLList     = "{{ url('api/list/tramites') }}";
-    let URLStatus   = "{{ url('tramites/status/') }}";
-    let URLAction   = "{{ url('tramites/') }}";
-    let URLNew      = "{{ url('tramites/create') }}";
+    let URLList     = "{{ url('api/list/gestion') }}";
+    let URLStatus   = "{{ url('gestion/status/') }}";
+    let URLAction   = "{{ url('gestion/') }}";
+    let URLNew      = "{{ url('gestion/create') }}";
 </script>
 
 <script src="{{ asset('assets/js/general/forms.js') }}"></script>
-<script src="{{ asset('assets/js/sections/tramites/table.js') }}"></script>
+<script src="{{ asset('assets/js/sections/gestion/table.js') }}"></script>
 @endsection

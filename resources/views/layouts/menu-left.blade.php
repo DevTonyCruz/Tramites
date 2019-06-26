@@ -11,9 +11,9 @@
         </li>
         <li><a href="#dropdown-app" aria-expanded="false" data-toggle="collapse"><i class="la la-puzzle-piece"></i><span>Gestor de tramites</span></a>
             <ul id="dropdown-app" class="collapse list-unstyled pt-0">
-                <li><a href="app-calendar.html">Tramites</a></li>
-                <li><a href="app-chat.html">Gestiones</a></li>
-                <li><a href="app-mail.html">Mail</a></li>
+                <li><a href="{{ url('/tramites') }}">Tramites</a></li>
+                <li><a href="{{ url('/gestion') }}">Gestiones</a></li>
+                <li><a href="{{ url('/estatus') }}">Estatus</a></li>
                 <li><a href="app-contact.html">Contact</a></li>
             </ul>
         </li>

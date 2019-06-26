@@ -28,7 +28,7 @@ class TramitesController extends Controller
             'name' => 'required|string|max:255',
             'first_last_name' => 'required|string|max:255',
             'second_last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:tramite',
             //'rol_id' => 'required|numeric',
             'password' => 'required|string|min:6|confirmed',
         ];
@@ -83,7 +83,7 @@ class TramitesController extends Controller
             if ($user->save()) {
                 //Mail::to($request->email)->send(new RegisterUserMail($user));
 
-                return redirect()->route('users.index');
+                return redirect()->route('tramites.index');
             }
 
             return back()
@@ -100,7 +100,7 @@ class TramitesController extends Controller
     public function edit($id)
     {
         $user = User::where('id', $id)->first();
-        return view('users.edit', ["user" => $user]);
+        return view('tramites.edit', ["user" => $user]);
     }
 
     public function update(Request $request, $id)
@@ -110,7 +110,7 @@ class TramitesController extends Controller
             'first_last_name' => 'required|string|max:255',
             'second_last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
-            //'email' => 'required|string|email|max:255|unique:users',
+            //'email' => 'required|string|email|max:255|unique:tramite',
             //'rol_id' => 'required|numeric',
         ];
 
@@ -157,7 +157,7 @@ class TramitesController extends Controller
             if ($user->save()) {
                 //Mail::to($request->email)->send(new RegisterUserMail($user));
 
-                return redirect()->route('users.index');
+                return redirect()->route('tramites.index');
             }
 
             return back()
@@ -171,18 +171,13 @@ class TramitesController extends Controller
         }
     }
 
-    public function status()
-    {
-        return view('users.index');
-    }
-
     public function destroy($id)
     {
         $user = User::where('id', $id)->first();
 
         if($user->delete()){
 
-            return redirect()->route('users.index');
+            return redirect()->route('tramites.index');
         }
 
         return back()

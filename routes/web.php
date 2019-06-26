@@ -42,7 +42,24 @@ Route::group(['prefix' => 'roles'], function () {
 });
 
 
-//
+Route::group(['prefix' => 'remitente'], function () {
+    Route::get('/',             'RemitenteController@index')->name('remitente.index');
+    Route::get('/create',       'RemitenteController@create')->name('remitente.create');
+    Route::post('/',            'RemitenteController@store')->name('remitente.store');
+    Route::get('/{id}',         'RemitenteController@edit')->name('remitente.edit');
+    Route::put('/{id}',         'RemitenteController@update')->name('remitente.update');
+    Route::delete('/{id}',      'RemitenteController@destroy')->name('remitente.destroy');
+});
+
+Route::group(['prefix' => 'gestion'], function () {
+    Route::get('/',             'GestionController@index')->name('gestion.index');
+    Route::get('/create',       'GestionController@create')->name('gestion.create');
+    Route::post('/',            'GestionController@store')->name('gestion.store');
+    Route::get('/{id}',         'GestionController@edit')->name('gestion.edit');
+    Route::put('/{id}',         'GestionController@update')->name('gestion.update');
+    Route::delete('/{id}',      'GestionController@destroy')->name('gestion.destroy');
+});
+
 Route::group(['prefix' => 'tramites'], function () {
     Route::get('/',             'TramitesController@index')->name('tramites.index');
     Route::get('/create',       'TramitesController@create')->name('tramites.create');
@@ -50,4 +67,12 @@ Route::group(['prefix' => 'tramites'], function () {
     Route::get('/{id}',         'TramitesController@edit')->name('tramites.edit');
     Route::put('/{id}',         'TramitesController@update')->name('tramites.update');
     Route::delete('/{id}',      'TramitesController@destroy')->name('tramites.destroy');
+});
+
+Route::group(['prefix' => 'sepomex'], function () {
+    Route::post('/get-states',                      'SepomexController@get_states')->name('sepomex.getStates');
+    Route::post('/get-location-by-state',           'SepomexController@get_location_by_state')->name('sepomex.getLocationByState');
+    Route::post('/get-colonies-by-location-state',  'SepomexController@get_colonies_by_location_state')->name('sepomex.getColoniesByLocationState');
+    Route::post('/get-zip-code',                    'SepomexController@get_zip_code')->name('sepomex.getZipCode');
+    Route::post('/get-search-zip-code',             'SepomexController@get_search_zip_code')->name('sepomex.getSearchZipCode');
 });

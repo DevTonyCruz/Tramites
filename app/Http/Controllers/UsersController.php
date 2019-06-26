@@ -177,11 +177,6 @@ class UsersController extends Controller
         }
     }
 
-    public function status()
-    {
-        return view('users.index');
-    }
-
     public function destroy($id)
     {
         $user = User::where('id', $id)->first();
