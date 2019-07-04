@@ -1,15 +1,26 @@
-$(function () {
-	$('#rootwizard').bootstrapWizard({
-		onTabShow: function (tab, navigation, index) {
-			var $total = navigation.find('li').length;
-			var $current = index + 1;
-			var $percent = ($current / $total) * 100;
-			$('#rootwizard .progressbar').css({
-				width: $percent + '%'
-			});
-		}
-	});	
-	$('#rootwizard .finish').click(function () {
-	    $('#success-modal').modal();
-	});	
+$(function() {
+    $("#rootwizard").bootstrapWizard({
+        onTabShow: function(f, a, d) {
+            var c = a.find("li").length;
+            var e = d + 1;
+            var b = (e / c) * 100;
+
+            console.log(a);
+            $("#rootwizard .progressbar").css({
+                width: b + "%"
+            })
+        },
+        onNext: function(tab, navigation, index) {
+            console.log(navigation);
+            switch (index) {
+                case 1:
+                    TramitesObject.TramiteBeneficiario(navigation, index);
+                    break;
+            }
+        }
+    });
+
+    $("#rootwizard .finish").click(function() {
+        $("#success-modal").modal()
+    })
 });

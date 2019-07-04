@@ -163,7 +163,7 @@
                             <select class="form-control state-data"
                                     id="state_shipping" name="state_shipping"
                                     onchange="SepomexObject.getLocation('tramites', this.value);" require>
-                        </select>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row d-flex align-items-center mb-5">

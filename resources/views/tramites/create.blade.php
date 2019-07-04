@@ -38,19 +38,19 @@
                                             <li>
                                                 <a href="#tab1" data-toggle="tab">
                                                     <span class="step">1</span>
-                                                    <span class="title">Step 1</span>
+                                                    <span class="title">Beneficiario</span>
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="#tab2" data-toggle="tab">
                                                     <span class="step">2</span>
-                                                    <span class="title">Step 2</span>
+                                                    <span class="title">Necesidad</span>
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="#tab3" data-toggle="tab">
                                                     <span class="step">3</span>
-                                                    <span class="title">Step 3</span>
+                                                    <span class="title">Gestión</span>
                                                 </a>
                                             </li>
                                         </ul>
@@ -58,201 +58,271 @@
                                 </div>
                                 <div class="tab-content" id="tramites">
                                     <div class="tab-pane" id="tab1">
-                                        <div class="section-title mt-5 mb-5">
-                                            <h4>Información de usuario</h4>
-                                        </div>
-                                        <div class="form-group row mb-3">
-                                            <div class="col-xl-4 mb-3">
-                                                <label for="name" class="form-control-label">Nombre<span class="text-danger ml-2">*</span></label>
-                                                <input type="text" id="name" name="name"
-                                                class="form-control{{ $errors->has('name') ? ' has-error' : '' }}"
-                                                placeholder="Ingrese su nombre"
-                                                value="{{ old('name') }}" required>
-                                                @if ($errors->has('name'))
-                                                    <span class="invalid-feedback d-block" role="alert">
-                                                        <strong>{{ $errors->first('name') }}</strong>
-                                                    </span>
-                                                @endif
+                                        <form id="form-beneficiario" method="POST">
+                                            <div class="section-title mt-5 mb-5">
+                                                <h4>Información de usuario</h4>
                                             </div>
-                                            <div class="col-xl-4">
-                                                <label class="form-control-label">Apellido paterno<span class="text-danger ml-2">*</span></label>
-                                                <input type="text" id="appaterno" name="appaterno"
-                                                        class="form-control{{ $errors->has('appaterno') ? ' has-error' : '' }}"
-                                                        placeholder="Ingrese su apellido paterno"
-                                                        value="{{ old('appaterno') }}" required>
+                                            <div class="form-group row mb-3">
+                                                <div class="col-xl-4 mb-3">
+                                                    <label for="name" class="form-control-label">Nombre<span class="text-danger ml-2">*</span></label>
+                                                    <input type="text" id="name" name="name"
+                                                    class="form-control{{ $errors->has('name') ? ' has-error' : '' }}"
+                                                    placeholder="Ingrese su nombre"
+                                                    value="{{ old('name') }}" required>
+                                                    @if ($errors->has('name'))
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $errors->first('name') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                                <div class="col-xl-4">
+                                                    <label class="form-control-label">Apellido paterno<span class="text-danger ml-2">*</span></label>
+                                                    <input type="text" id="appaterno" name="appaterno"
+                                                            class="form-control{{ $errors->has('appaterno') ? ' has-error' : '' }}"
+                                                            placeholder="Ingrese su apellido paterno"
+                                                            value="{{ old('appaterno') }}" required>
 
-                                                @if ($errors->has('appaterno'))
-                                                    <span class="invalid-feedback d-block" role="alert">
-                                                        <strong>{{ $errors->first('appaterno') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                            <div class="col-xl-4">
-                                                <label class="form-control-label">Apellido materno<span class="text-danger ml-2">*</span></label>
-                                                <input type="text" id="apmaterno" name="apmaterno"
-                                                        class="form-control{{ $errors->has('apmaterno') ? ' has-error' : '' }}"
-                                                        placeholder="Ingrese su apellido materno"
-                                                        value="{{ old('apmaterno') }}" required>
-                                                @if ($errors->has('apmaterno'))
-                                                    <span class="invalid-feedback d-block" role="alert">
-                                                        <strong>{{ $errors->first('apmaterno') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="form-group row mb-5">
-                                            <div class="col-xl-6 mb-3">
-                                                <label class="form-control-label">Correo electrónico</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon addon-secondary">
-                                                        <i class="la la-at"></i>
-                                                    </span>
-                                                    <input type="text" id="email" name="email"
-                                                            class="form-control{{ $errors->has('email') ? ' has-error' : '' }}"
-                                                            placeholder="Ingrese su correo electrónico"
-                                                            value="{{ old('email') }}" required>
-                                                    @if ($errors->has('email'))
+                                                    @if ($errors->has('appaterno'))
                                                         <span class="invalid-feedback d-block" role="alert">
-                                                            <strong>{{ $errors->first('email') }}</strong>
+                                                            <strong>{{ $errors->first('appaterno') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                                <div class="col-xl-4">
+                                                    <label class="form-control-label">Apellido materno<span class="text-danger ml-2">*</span></label>
+                                                    <input type="text" id="apmaterno" name="apmaterno"
+                                                            class="form-control{{ $errors->has('apmaterno') ? ' has-error' : '' }}"
+                                                            placeholder="Ingrese su apellido materno"
+                                                            value="{{ old('apmaterno') }}" required>
+                                                    @if ($errors->has('apmaterno'))
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $errors->first('apmaterno') }}</strong>
                                                         </span>
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div class="col-xl-6 mb-3">
-                                                <label class="form-control-label">Teléfono</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon addon-secondary">
-                                                        <i class="la la-phone"></i>
-                                                    </span>
-                                                    <input type="text" id="phone" name="phone"
-                                                            class="form-control{{ $errors->has('phone') ? ' has-error' : '' }}"
-                                                            placeholder="Ingrese su teléfono"
-                                                            value="{{ old('phone') }}">
-                                                    @if ($errors->has('phone'))
+                                            <div class="form-group row mb-5">
+                                                <div class="col-xl-6 mb-3">
+                                                    <label class="form-control-label">Correo electrónico</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon addon-secondary">
+                                                            <i class="la la-at"></i>
+                                                        </span>
+                                                        <input type="text" id="email" name="email"
+                                                                class="form-control{{ $errors->has('email') ? ' has-error' : '' }}"
+                                                                placeholder="Ingrese su correo electrónico"
+                                                                value="{{ old('email') }}" required>
+                                                        @if ($errors->has('email'))
+                                                            <span class="invalid-feedback d-block" role="alert">
+                                                                <strong>{{ $errors->first('email') }}</strong>
+                                                            </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 mb-3">
+                                                    <label class="form-control-label">Teléfono</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon addon-secondary">
+                                                            <i class="la la-phone"></i>
+                                                        </span>
+                                                        <input type="text" id="phone" name="phone"
+                                                                class="form-control{{ $errors->has('phone') ? ' has-error' : '' }}"
+                                                                placeholder="Ingrese su teléfono"
+                                                                value="{{ old('phone') }}">
+                                                        @if ($errors->has('phone'))
+                                                            <span class="invalid-feedback d-block" role="alert">
+                                                                <strong>{{ $errors->first('phone') }}</strong>
+                                                            </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="section-title mt-5 mb-5">
+                                                <h4>Dirección</h4>
+                                            </div>
+                                            <div class="form-group row mb-3">
+                                                <div class="col-xl-6 mb-3">
+                                                    <label class="form-control-label">Calle<span class="text-danger ml-2">*</span></label>
+                                                    <input type="text" id="direccion" name="direccion"
+                                                            class="form-control{{ $errors->has('direccion') ? ' has-error' : '' }}"
+                                                            placeholder="Ingrese una calle"
+                                                            value="{{ old('direccion') }}">
+                                                    @if ($errors->has('direccion'))
                                                         <span class="invalid-feedback d-block" role="alert">
-                                                            <strong>{{ $errors->first('phone') }}</strong>
+                                                            <strong>{{ $errors->first('direccion') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                                <div class="col-xl-2">
+                                                    <label class="form-control-label">Núm. Interior</label>
+                                                    <input type="text" id="interior" name="interior"
+                                                            class="form-control{{ $errors->has('interior') ? ' has-error' : '' }}"
+                                                            placeholder="Núm. Interior"
+                                                            value="{{ old('interior') }}">
+                                                    @if ($errors->has('interior'))
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $errors->first('interior') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                                <div class="col-xl-2 mb-3">
+                                                    <label class="form-control-label">Núm. Exterior<span class="text-danger ml-2">*</span></label>
+                                                    <input type="text" id="exterior" name="exterior"
+                                                            class="form-control{{ $errors->has('exterior') ? ' has-error' : '' }}"
+                                                            placeholder="Num. Exterior"
+                                                            value="{{ old('exterior') }}">
+                                                    @if ($errors->has('exterior'))
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $errors->first('exterior') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                                <div class="col-xl-2 mb-3">
+                                                    <label class="form-control-label">Código Postal<span class="text-danger ml-2">*</span></label>
+                                                    <input type="text" id="zip_code" name="zip_code"
+                                                            class="form-control{{ $errors->has('zip_code') ? ' has-error' : '' }} zip-code"
+                                                            placeholder="Ingrese el código postal"
+                                                            value="{{ old('zip_code') }}"
+                                                            onkeyup="SepomexObject.searchZip('tramites')">
+                                                    @if ($errors->has('zip_code'))
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $errors->first('zip_code') }}</strong>
                                                         </span>
                                                     @endif
                                                 </div>
                                             </div>
-                                        </div>
+                                            <div class="form-group row mb-3">
+                                                <div class="col-xl-4 mb-3">
+                                                    <label class="form-control-label">Estado<span class="text-danger ml-2">*</span></label>
+                                                    <select class="form-control state-data"
+                                                            id="state" name="state"
+                                                            onchange="SepomexObject.getLocation('tramites', this.value);" require>
+                                                    </select>
+                                                </div>
+                                                <div class="col-xl-4 mb-5">
+                                                    <label class="form-control-label">Municipio<span class="text-danger ml-2">*</span></label>
+                                                    <select class="form-control location-data"
+                                                            id="city" name="city"
+                                                            onchange="SepomexObject.getColony('tramites', this.value);"
+                                                            disabled require>
+                                                    </select>
+                                                </div>
+                                                <div class="col-xl-4">
+                                                    <label class="form-control-label">Colonia<span class="text-danger ml-2">*</span></label>
+                                                    <select class="form-control colony-data"
+                                                            id="colony" name="colony"
+                                                            onchange="SepomexObject.getZipCode('tramites', this.value);"
+                                                            disabled require>
+                                                    </select>
+                                                    <input type="hidden" class="sepomex-id" id="sepomex_id" name="sepomex_id">
+                                                </div>
+                                            </div>
+                                            <ul class="pager wizard text-right">
+                                                <li class="next d-inline-block">
+                                                    <a href="javascript:;" class="btn btn-gradient-01" step="beneficiario">Siguiente</a>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane" id="tab2">
                                         <div class="section-title mt-5 mb-5">
-                                            <h4>Dirección</h4>
-                                        </div>
-                                        <div class="form-group row mb-3">
-                                            <div class="col-xl-6 mb-3">
-                                                <label class="form-control-label">Calle<span class="text-danger ml-2">*</span></label>
-                                                <input type="text" id="direccion" name="direccion"
-                                                        class="form-control{{ $errors->has('direccion') ? ' has-error' : '' }}"
-                                                        placeholder="Ingrese una calle"
-                                                        value="{{ old('direccion') }}">
-                                                @if ($errors->has('direccion'))
-                                                    <span class="invalid-feedback d-block" role="alert">
-                                                        <strong>{{ $errors->first('direccion') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                            <div class="col-xl-2">
-                                                <label class="form-control-label">Núm. Interior<span class="text-danger ml-2">*</span></label>
-                                                <input type="text" id="interior" name="interior"
-                                                        class="form-control{{ $errors->has('interior') ? ' has-error' : '' }}"
-                                                        placeholder="Núm. Interior"
-                                                        value="{{ old('interior') }}">
-                                                @if ($errors->has('interior'))
-                                                    <span class="invalid-feedback d-block" role="alert">
-                                                        <strong>{{ $errors->first('interior') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                            <div class="col-xl-2 mb-3">
-                                                <label class="form-control-label">Núm. Exterior<span class="text-danger ml-2">*</span></label>
-                                                <input type="text" id="exterior" name="exterior"
-                                                        class="form-control{{ $errors->has('exterior') ? ' has-error' : '' }}"
-                                                        placeholder="Num. Exterior"
-                                                        value="{{ old('exterior') }}">
-                                                @if ($errors->has('exterior'))
-                                                    <span class="invalid-feedback d-block" role="alert">
-                                                        <strong>{{ $errors->first('exterior') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                            <div class="col-xl-2 mb-3">
-                                                <label class="form-control-label">Código Postal<span class="text-danger ml-2">*</span></label>
-                                                <input type="text" id="zip_code" name="zip_code"
-                                                        class="form-control{{ $errors->has('zip_code') ? ' has-error' : '' }} zip-code"
-                                                        placeholder="Ingrese el código postal"
-                                                        value="{{ old('zip_code') }}"
-                                                        onkeyup="SepomexObject.searchZip('tramites')">
-                                                @if ($errors->has('zip_code'))
-                                                    <span class="invalid-feedback d-block" role="alert">
-                                                        <strong>{{ $errors->first('zip_code') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
+                                            <h4>Información general</h4>
                                         </div>
                                         <div class="form-group row mb-3">
                                             <div class="col-xl-4 mb-3">
-                                                <label class="form-control-label">Estado<span class="text-danger ml-2">*</span></label>
-                                                <select class="form-control state-data"
-                                                        id="state_shipping" name="state_shipping"
-                                                        onchange="SepomexObject.getLocation('tramites', this.value);" require>
+                                                <label for="secretaria" class="form-control-label">Secretaría<span class="text-danger ml-2">*</span></label>
+                                                <input type="text" id="secretaria" name="secretaria"
+                                                class="form-control{{ $errors->has('secretaria') ? ' has-error' : '' }}"
+                                                placeholder="Ingrese su nombre"
+                                                value="{{ old('secretaria') }}" required>
+                                                @if ($errors->has('secretaria'))
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $errors->first('secretaria') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            <div class="col-xl-4 mb-3">
+                                                <label for="demarcacion" class="form-control-label">Demarcación<span class="text-danger ml-2">*</span></label>
+                                                <input type="text" id="demarcacion" name="demarcacion"
+                                                class="form-control{{ $errors->has('demarcacion') ? ' has-error' : '' }}"
+                                                placeholder="Ingrese su nombre"
+                                                value="{{ old('demarcacion') }}" required>
+                                                @if ($errors->has('demarcacion'))
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $errors->first('demarcacion') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            <div class="col-xl-4 mb-3">
+                                                <label for="distrito" class="form-control-label">Distrito<span class="text-danger ml-2">*</span></label>
+                                                <input type="text" id="distrito" name="distrito"
+                                                class="form-control{{ $errors->has('distrito') ? ' has-error' : '' }}"
+                                                placeholder="Ingrese el distrito"
+                                                value="{{ old('distrito') }}" required>
+                                                @if ($errors->has('distrito'))
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $errors->first('distrito') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            <div class="col-xl-4 mb-3">
+                                                <label for="simpatizante" class="form-control-label">Simpatizante<span class="text-danger ml-2">*</span></label>
+                                                <input type="text" id="simpatizante" name="simpatizante"
+                                                class="form-control{{ $errors->has('simpatizante') ? ' has-error' : '' }}"
+                                                placeholder="Ingrese el simpatizante"
+                                                value="{{ old('simpatizante') }}" required>
+                                                @if ($errors->has('simpatizante'))
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $errors->first('simpatizante') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            <div class="col-xl-4 mb-3">
+                                                <label class="form-control-label">Gestión<span class="text-danger ml-2">*</span></label>
+                                                <select class="form-control location-data"
+                                                        id="gestion" name="gestion"
+                                                        require>
+                                                    <option value="S">Seleccionar</option>
+
+                                                    @foreach ($gestiones as $gestion)
+                                                        <option value="{{ $gestion->id }}">{{ $gestion->nombre }}</option>
+                                                    @endforeach
+
                                                 </select>
                                             </div>
-                                            <div class="col-xl-4 mb-5">
+                                            <div class="col-xl-4 mb-3">
                                                 <label class="form-control-label">Municipio<span class="text-danger ml-2">*</span></label>
                                                 <select class="form-control location-data"
-                                                        id="city_shipping" name="city_shipping"
+                                                        id="city" name="city"
                                                         onchange="SepomexObject.getColony('tramites', this.value);"
                                                         disabled require>
                                                 </select>
                                             </div>
-                                            <div class="col-xl-4">
-                                                <label class="form-control-label">Colonia<span class="text-danger ml-2">*</span></label>
-                                                <select class="custom-select colony-data"
-                                                        id="colony_shipping" name="colony_shipping"
-                                                        onchange="SepomexObject.getZipCode('tramites', this.value);"
-                                                        disabled require>
-                                                </select>
-                                                <input type="hidden" class="sepomex-id" id="sepomex_id" name="sepomex_id">
-                                            </div>
-                                        </div>
-                                        <ul class="pager wizard text-right">
-                                            <li class="previous d-inline-block">
-                                                <a href="javascript:;" class="btn btn-secondary ripple">Previous</a>
-                                            </li>
-                                            <li class="next d-inline-block">
-                                                <a href="javascript:;" class="btn btn-gradient-01">Next</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="tab-pane" id="tab2">
-                                        <div class="section-title mt-5 mb-5">
-                                            <h4>Account Details</h4>
-                                        </div>
-                                        <div class="form-group row mb-3">
                                             <div class="col-xl-6 mb-3">
-                                                <label class="form-control-label">Username<span class="text-danger ml-2">*</span></label>
-                                                <input type="text" value="DGreen" class="form-control">
+                                                <label class="col-lg-3 form-control-label">Fecha inicial</label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon addon-secondary">
+                                                            <i class="la la-calendar"></i>
+                                                        </span>
+                                                        <input type="text" class="form-control datepicker" placeholder="Select value">
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-xl-6">
-                                                <label class="form-control-label">Password<span class="text-danger ml-2">*</span></label>
-                                                <input type="text" value="**********" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row mb-3">
-                                            <div class="col-xl-12">
-                                                <label class="form-control-label">Url</label>
-                                                <input type="url" value="http://mywebsite.com" class="form-control">
+                                            <div class="col-xl-6 mb-3">
+                                                <label class="col-lg-3 form-control-label">Fecha final</label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon addon-secondary">
+                                                            <i class="la la-calendar"></i>
+                                                        </span>
+                                                        <input type="text" class="form-control datepicker" placeholder="Select value">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="section-title mt-5 mb-5">
                                             <h4>Billing Information</h4>
-                                        </div>
-                                        <div class="form-group row mb-3">
-                                            <div class="col-xl-12 mb-3">
-                                                <label class="form-control-label">Card Number</label>
-                                                <input type="text" value="98765432145698547" class="form-control">
-                                            </div>
                                         </div>
                                         <div class="form-group row mb-3">
                                             <div class="col-xl-4 mb-3">
@@ -435,9 +505,13 @@
 
 @section('pagescript')
 <script src="{{ asset('assets/vendors/js/bootstrap-wizard/bootstrap.wizard.min.js') }}"></script>
-<script src="{{ asset('assets/js/components/wizard/form-wizard.min.js') }}"></script>
+<script src="{{ asset('assets/js/components/wizard/form-wizard.js') }}"></script>
+<script src="{{ asset('assets/vendors/js/datepicker/moment.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/js/datepicker/daterangepicker.js') }}"></script>
+<script src="{{ asset('assets/js/components/datepicker/datepicker.js') }}"></script>
 <script src="{{ asset('assets/js/general/sepomex.js') }}"></script>
 <script src="{{ asset('assets/js/general/request.js') }}"></script>
+<script src="{{ asset('assets/js/general/tramites.js') }}"></script>
 
 <script type="text/javascript">
     SepomexObject.getStates('tramites');

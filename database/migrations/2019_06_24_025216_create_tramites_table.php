@@ -24,16 +24,17 @@ class CreateTramitesTable extends Migration
             $table->integer('sepomex_id')->nullable();
             $table->string('telefono')->nullable();
             $table->string('email');
+
             $table->string('secretaria')->nullable();
             $table->string('demarcacion')->nullable();
             $table->string('distrito')->nullable();
-            $table->string('cantidad');
-            $table->string('simpatizante');
+            $table->string('simpatizante')->nullable();
+            $table->integer('gestion_id')->nullable();
+            $table->integer('remitente_id')->nullable();
+
+            $table->string('cantidad')->nullable();
             $table->longText('foto')->nullable();
-            $table->string('ife');
-            $table->integer('gestion_id');
-            $table->integer('estatus_id');
-            $table->integer('remitente_id');
+            $table->string('ife')->nullable();
             $table->longText('observaciones')->nullable();
             $table->integer('created_by');
             $table->integer('updated_by');
