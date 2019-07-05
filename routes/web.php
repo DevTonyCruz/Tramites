@@ -63,9 +63,7 @@ Route::group(['prefix' => 'gestion'], function () {
 Route::group(['prefix' => 'tramites'], function () {
     Route::get('/',             'TramitesController@index')->name('tramites.index');
     Route::get('/create',       'TramitesController@create')->name('tramites.create');
-    Route::post('/beneficiario','TramitesController@beneficiario')->name('tramites.beneficiario');
     Route::post('/',            'TramitesController@store')->name('tramites.store');
-    //Route::post('/',            'TramitesController@store')->name('tramites.store');
     Route::get('/{id}',         'TramitesController@edit')->name('tramites.edit');
     Route::put('/{id}',         'TramitesController@update')->name('tramites.update');
     Route::delete('/{id}',      'TramitesController@destroy')->name('tramites.destroy');

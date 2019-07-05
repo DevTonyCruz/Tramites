@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Gestion;
 use App\Models\Remitente;
+use Illuminate\Support\Facades\Storage;
 
 class TramitesController extends Controller
 {
@@ -32,7 +33,7 @@ class TramitesController extends Controller
         ]);
     }
 
-    public function beneficiario(Request $request)
+    public function store(Request $request)
     {
         $rules = [
             'name' => 'required',
@@ -42,6 +43,19 @@ class TramitesController extends Controller
             'direccion' => 'required',
             'exterior' => 'required',
             'sepomex_id' => 'required|numeric',
+
+            'secretaria' => 'required',
+            'demarcacion' => 'required',
+            'distrito' => 'required',
+            'simpatizante' => 'required',
+            'gestion' => 'required|numeric',
+            'remitente' => 'required|numeric',
+            'fecha_ini' => 'required',
+
+            'ife' => 'required',
+            'cantidad' => 'required',
+            'observaciones' => 'required',
+            'file' => 'required|mimes:png,jpeg,jpg',
         ];
 
         $messages = [
@@ -54,15 +68,31 @@ class TramitesController extends Controller
             'email.email' => 'El campo email no es válido',
             'sepomex_id.required' => 'El código postal es requerido',
             'sepomex_id.numeric' => 'El código postal no es válido',
+
+            'secretaria.required' => 'El campo secretaría es requerido',
+            'demarcacion.required' => 'El campo demarcación es requerido',
+            'distrito.required' => 'El campo distrito es requerido',
+            'simpatizante.required' => 'El campo simpatizante es requerido',
+            'gestion.required' => 'El campo gestion es requerido',
+            'gestion.numeric' => 'El campo gestion no es válido',
+            'remitente.required' => 'El campo remitente es requerido',
+            'remitente.numeric' => 'El campo remitente no es válid',
+            'fecha_ini.required' => 'El campo fecha inicial es requerido',
+
+            'ife.required' => 'El campo ife es requerido',
+            'cantidad.required' => 'El campo cantidad es requerido',
+            'observaciones.required' => 'El campo observaciones es requerido',
+            'file.required' => 'El campo imagen es requerido',
+            'file.mimes' => 'El campo imagen no contiene un archvivo válido',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return response()->json(['errors'=>$validator->errors()]);
-            /*return back()
+            //return response()->json(['errors'=>$validator->errors()]);
+            return back()
                 ->withErrors($validator)
-                ->withInput();*/
+                ->withInput();
         }
 
         try {
@@ -74,9 +104,21 @@ class TramitesController extends Controller
             $tramite->direccion = $request->direccion;
             $tramite->interior = $request->interior;
             $tramite->exterior = $request->exterior;
+            $tramite->sepomex_id = $request->sepomex_id;
             $tramite->email = $request->email;
             $tramite->telefono = $request->phone;
-            $tramite->sepomex_id = $request->sepomex_id;
+
+            $tramite->secretaria = $request->secretaria;
+            $tramite->demarcacion = $request->demarcacion;
+            $tramite->distrito = $request->distrito;
+            $tramite->simpatizante = $request->simpatizante;
+            $tramite->gestion_id = $request->gestion_id;
+            $tramite->remitente_id = $request->remitente_id;
+
+            $tramite->cantidad = $request->cantidad;
+            $tramite->ife = $request->ife;
+            $tramite->observaciones = $request->observaciones;
+
             $tramite->created_by = Auth::user()->id;
             $tramite->updated_by = Auth::user()->id;
             $tramite->created_at = Carbon::now()->format('Y-m-d H:i:s');
@@ -85,23 +127,22 @@ class TramitesController extends Controller
             if ($tramite->save()) {
                 //Mail::to($request->email)->send(new RegisterUserMail($tramite));
 
+                if($request->file('file')){
+                    $path = Storage::disk('public')->put('images/storage/tramites', $request->file('file'));
+                    $tramite->fill(['foto' => $path])->save();
+                }
+
                 return response()->json(["error" => "no"])->setStatusCode(200, "Registro guardado con exito");
             }
 
-            abort(401, 'Por el momento no podemos realizar la acción solicitada, intente más tarde. (Code 100)');
-            /*return response()
-                    ->json(["error" => "si"])->setStatusCode(400,"Por el momento no podemos realizar la acción solicitada, intente más tarde. (Code 100)");*/
-
-            /*return back()
+            return back()
                 ->with('status', 'Por el momento no podemos realizar la acción solicitada, intente más tarde. (Code 100)')
-                ->withInput();;*/
+                ->withInput();
         } catch (QueryException $e) {
-            abort(401, 'Por el momento no podemos realizar la acción solicitada, intente más tarde. (Code 100)');
-            //return response()->json(["error" => "si"])->setStatusCode(400,"Error:" + $e + ". (Code 100)");
             //return back()->with('status', $e->getMessage());
-            /*return back()
+            return back()
                 ->with('status', 'Por el momento no podemos realizar la acción solicitada, intente más tarde. (Code 200)')
-                ->withInput();;*/
+                ->withInput();
         }
     }
 
