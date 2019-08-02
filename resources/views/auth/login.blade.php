@@ -77,3 +77,13 @@
         <!-- End Row -->
     </div>
 @endsection
+
+@section('js')
+@if (session('status'))
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#modal-form-errors-auth").modal();
+        });
+</script>
+@endif
+@endsection

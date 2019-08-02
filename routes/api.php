@@ -21,5 +21,10 @@ Route::group(['prefix' => 'list'], function () {
     Route::get('users','UsersController@list')->name('users.list');
     Route::get('gestion','GestionController@list')->name('gestion.list');
     Route::get('remitente','RemitenteController@list')->name('remitente.list');
+    Route::get('tramites','TramitesController@list')->name('tramites.list');
     Route::get('estatus','EstatusController@list')->name('estatus.list');
+
+    Route::get('grupos','GruposController@list')->name('grupos.list');
+    Route::get('profesiones','ProfesionesController@list')->name('profesiones.list');
+    Route::get('fechas','FechasController@list')->name('fechas.list');
 });

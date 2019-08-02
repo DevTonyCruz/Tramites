@@ -10,17 +10,70 @@ use Carbon\Carbon;
 use App\Models\Gestion;
 use App\Models\Remitente;
 use Illuminate\Support\Facades\Storage;
+use App\Exports\TramitesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TramitesController extends Controller
 {
     public function index()
     {
-        return view('tramites.index');
+        $cerrados = Tramites::status('C')->count();
+        $porvencer = Tramites::status('P')->count();
+        $vencidos = Tramites::status('V')->count();
+
+        $entramiteNull = Tramites::whereNull('fecha_fin')->where('status', 1)->get();
+        $entramiteNotNull = Tramites::status('E')->get();
+
+        $entramite = $entramiteNull->merge($entramiteNotNull)->count();
+
+        return view('tramites.index',[
+            "cerrados" => $cerrados,
+            "porvencer" => $porvencer,
+            "vencidos" => $vencidos,
+            "entramite" => $entramite,
+        ]);
     }
 
     public function list()
     {
-        return datatables()->eloquent(Tramites::query())->toJson();
+        $model = Tramites::with(['gestion', 'remitente', 'Sepomex']);
+
+        return datatables()->eloquent($model)
+            ->addColumn('estatus', function (Tramites $tramites) {
+
+                $estatus = '';
+                if (is_null($tramites->fecha_fin)) {
+                    if ($tramites->status == 1) {
+                        $estatus = 'Activo';
+                    }
+                    if ($tramites->status == 0) {
+                        $estatus = 'Cerrado';
+                    }
+                } else {
+                    $fecha_final = Carbon::parse($tramites->fecha_fin);
+                    $fecha_hoy = Carbon::now();
+                    $diff = $fecha_hoy->diffInDays($fecha_final, false) + 1;
+
+                    if ($tramites->status == 1) {
+                        if ($diff > 3) {
+                            $estatus = 'Activo';
+                        }
+
+                        if ($diff <= 3 && $diff > 0) {
+                            $estatus = 'Por vencer';
+                        }
+
+                        if ($diff <= 0) {
+                            $estatus = 'Vencido';
+                        }
+                    } else {
+                        $estatus = 'Cerrado';
+                    }
+                }
+
+                return $estatus;
+            })->toJson();
+        //return datatables()->eloquent(Tramites::query())->toJson();
     }
 
     public function create()
@@ -38,58 +91,53 @@ class TramitesController extends Controller
         $rules = [
             'name' => 'required',
             'appaterno' => 'required',
-            'apmaterno' => 'required',
-            'email' => 'required|email',
+            'email' => 'email',
+            'phone' => 'max:10',
             'direccion' => 'required',
             'exterior' => 'required',
             'sepomex_id' => 'required|numeric',
+            'zip_code' => 'required',
 
-            'secretaria' => 'required',
+            'seccional' => 'required',
             'demarcacion' => 'required',
             'distrito' => 'required',
-            'simpatizante' => 'required',
             'gestion' => 'required|numeric',
             'remitente' => 'required|numeric',
             'fecha_ini' => 'required',
 
-            'ife' => 'required',
+            'ife' => 'max:50',
             'cantidad' => 'required',
-            'observaciones' => 'required',
-            'file' => 'required|mimes:png,jpeg,jpg',
+            'file' => 'mimes:png,jpeg,jpg',
         ];
 
         $messages = [
             'name.required' => 'El campo nombre es requerido',
             'appaterno.required' => 'El campo apellido paterno es requerido',
-            'apmaterno.required' => 'El campo apellido materno es requerido',
             'direccion.required' => 'El campo calle es requerido',
             'exterior.required' => 'El campo número exterior es requerido',
-            'email.required' => 'El campo email es requerido',
             'email.email' => 'El campo email no es válido',
+            'phone.max:10' => 'El campo teléfono debe de contener como máximo 10 digitos',
             'sepomex_id.required' => 'El código postal es requerido',
             'sepomex_id.numeric' => 'El código postal no es válido',
+            'zip_code.required' => 'Debe seleccionar una colonia',
 
-            'secretaria.required' => 'El campo secretaría es requerido',
+            'seccional.required' => 'El campo seccional es requerido',
             'demarcacion.required' => 'El campo demarcación es requerido',
             'distrito.required' => 'El campo distrito es requerido',
-            'simpatizante.required' => 'El campo simpatizante es requerido',
             'gestion.required' => 'El campo gestion es requerido',
             'gestion.numeric' => 'El campo gestion no es válido',
             'remitente.required' => 'El campo remitente es requerido',
             'remitente.numeric' => 'El campo remitente no es válid',
             'fecha_ini.required' => 'El campo fecha inicial es requerido',
 
-            'ife.required' => 'El campo ife es requerido',
+            'ife.max' => 'El campo IFE debe de contener como máximo 50 digitos',
             'cantidad.required' => 'El campo cantidad es requerido',
-            'observaciones.required' => 'El campo observaciones es requerido',
-            'file.required' => 'El campo imagen es requerido',
             'file.mimes' => 'El campo imagen no contiene un archvivo válido',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            //return response()->json(['errors'=>$validator->errors()]);
             return back()
                 ->withErrors($validator)
                 ->withInput();
@@ -108,17 +156,24 @@ class TramitesController extends Controller
             $tramite->email = $request->email;
             $tramite->telefono = $request->phone;
 
-            $tramite->secretaria = $request->secretaria;
+            $tramite->seccional = $request->seccional;
             $tramite->demarcacion = $request->demarcacion;
             $tramite->distrito = $request->distrito;
             $tramite->simpatizante = $request->simpatizante;
-            $tramite->gestion_id = $request->gestion_id;
-            $tramite->remitente_id = $request->remitente_id;
+            $tramite->gestion_id = $request->gestion;
+            $tramite->remitente_id = $request->remitente;
 
             $tramite->cantidad = $request->cantidad;
             $tramite->ife = $request->ife;
             $tramite->observaciones = $request->observaciones;
 
+            $tramite->fecha_ini = Carbon::parse($request->fecha_ini)->format('Y-m-d H:i:s');
+
+            if (!isset($request->sin_fecha)) {
+                $tramite->fecha_fin = Carbon::parse($request->fecha_fin)->format('Y-m-d H:i:s');
+            }
+
+            $tramite->status = 1;
             $tramite->created_by = Auth::user()->id;
             $tramite->updated_by = Auth::user()->id;
             $tramite->created_at = Carbon::now()->format('Y-m-d H:i:s');
@@ -127,59 +182,82 @@ class TramitesController extends Controller
             if ($tramite->save()) {
                 //Mail::to($request->email)->send(new RegisterUserMail($tramite));
 
-                if($request->file('file')){
-                    $path = Storage::disk('public')->put('images/storage/tramites', $request->file('file'));
+                if ($request->file('foto')) {
+                    $path = Storage::disk('public')->put('images/storage/tramites', $request->file('foto'));
                     $tramite->fill(['foto' => $path])->save();
                 }
 
-                return response()->json(["error" => "no"])->setStatusCode(200, "Registro guardado con exito");
+                return redirect()->route('tramites.index');
             }
 
             return back()
-                ->with('status', 'Por el momento no podemos realizar la acción solicitada, intente más tarde. (Code 100)')
-                ->withInput();
+                ->with('status', 'Por el momento no podemos realizar la acción solicitada, intente más tarde. (Code 100)');
         } catch (QueryException $e) {
             //return back()->with('status', $e->getMessage());
             return back()
-                ->with('status', 'Por el momento no podemos realizar la acción solicitada, intente más tarde. (Code 200)')
-                ->withInput();
+                ->with('status', 'Por el momento no podemos realizar la acción solicitada, intente más tarde. (Code 200)');
         }
     }
 
     public function edit($id)
     {
-        $tramite = User::where('id', $id)->first();
-        return view('tramites.edit', ["user" => $tramite]);
+        $tramite = Tramites::where('id', $id)->first();
+        $gestiones = Gestion::all();
+        $remitentes = Remitente::all();
+        return view('tramites.edit', [
+            "tramite" => $tramite,
+            "gestiones" => $gestiones,
+            "remitentes" => $remitentes,
+        ]);
     }
 
     public function update(Request $request, $id)
     {
         $rules = [
-            'name' => 'required|string|max:255',
-            'first_last_name' => 'required|string|max:255',
-            'second_last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            //'email' => 'required|string|email|max:255|unique:tramite',
-            //'rol_id' => 'required|numeric',
+            'name' => 'required',
+            'appaterno' => 'required',
+            'email' => 'email',
+            'phone' => 'max:10',
+            'direccion' => 'required',
+            'exterior' => 'required',
+            'exterior' => 'numeric',
+            'zip_code' => 'required|numeric',
+
+            'seccional' => 'required',
+            'demarcacion' => 'required',
+            'distrito' => 'required',
+            'gestion' => 'required|numeric',
+            'remitente' => 'required|numeric',
+            'fecha_ini' => 'required',
+
+            'ife' => 'max:50',
+            'cantidad' => 'required',
+            'file' => 'mimes:png,jpeg,jpg',
         ];
 
         $messages = [
             'name.required' => 'El campo nombre es requerido',
-            'name.max:255' => 'El campo nombre solo permite 255 caracteres',
-            'name.string' => 'El campo nombre debe ser texto',
-            'first_last_name.required' => 'El campo apellido paterno es requerido',
-            'first_last_name.required' => 'El campo apellido paterno solo permite 255 caracteres',
-            'first_last_name.required' => 'El campo apellido paterno debe ser texto',
-            'second_last_name.required' => 'El campo apellido materno es requerido',
-            'second_last_name.max:255' => 'El campo apellido materno solo permite 255 caracteres',
-            'second_last_name.string' => 'El campo apellido materno debe ser texto',
-            'email.required' => 'El campo email es requerido',
+            'appaterno.required' => 'El campo apellido paterno es requerido',
+            'direccion.required' => 'El campo calle es requerido',
+            'exterior.required' => 'El campo número exterior es requerido',
             'email.email' => 'El campo email no es válido',
-            'email.max:255' => 'El campo email solo permite 255 caracteres',
-            'email.string' => 'El campo email debe ser texto',
-            //'email.unique' => 'El email que ingreso ya se encuentra registrado',
-            //'rol_id.required' => 'El campo rol es requerido',
-            //'rol_id.numeric' => 'Debe seleccionar un rol correcto',
+            'phone.max:10' => 'El campo télefono debe de contener como máximo 10 digitos',
+            'sepomex_id.required' => 'El código postal es requerido',
+            'sepomex_id.numeric' => 'El código postal no es válido',
+            'zip_code.required' => 'Debe seleccionar una colonia',
+
+            'seccional.required' => 'El campo seccional es requerido',
+            'demarcacion.required' => 'El campo demarcación es requerido',
+            'distrito.required' => 'El campo distrito es requerido',
+            'gestion.required' => 'El campo gestion es requerido',
+            'gestion.numeric' => 'El campo gestion no es válido',
+            'remitente.required' => 'El campo remitente es requerido',
+            'remitente.numeric' => 'El campo remitente no es válid',
+            'fecha_ini.required' => 'El campo fecha inicial es requerido',
+
+            'ife.max' => 'El campo IFE debe de contener como máximo 50 digitos',
+            'cantidad.required' => 'El campo cantidad es requerido',
+            'file.mimes' => 'El campo imagen no contiene un archvivo válido',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -192,19 +270,56 @@ class TramitesController extends Controller
 
         try {
 
-            $tramite = User::where('id', $id)->first();
-            $tramite->name = $request->name;
-            $tramite->first_last_name = $request->first_last_name;
-            $tramite->second_last_name = $request->second_last_name;
-            $tramite->fullname = $request->name . ' ' . $request->first_last_name . ' ' . $request->second_last_name;
-            $tramite->phone = $request->phone;
+            $tramite = Tramites::where('id', $id)->first();
+            $tramite->nombre = $request->name;
+            $tramite->appaterno = $request->appaterno;
+            $tramite->apmaterno = $request->apmaterno;
+            $tramite->direccion = $request->direccion;
+            $tramite->interior = $request->interior;
+            $tramite->exterior = $request->exterior;
+            $tramite->sepomex_id = $request->sepomex_id;
             $tramite->email = $request->email;
+            $tramite->telefono = $request->phone;
+
+            $tramite->seccional = $request->seccional;
+            $tramite->demarcacion = $request->demarcacion;
+            $tramite->distrito = $request->distrito;
+            $tramite->simpatizante = $request->simpatizante;
+            $tramite->gestion_id = $request->gestion;
+            $tramite->remitente_id = $request->remitente;
+
+            $tramite->cantidad = $request->cantidad;
+            $tramite->ife = $request->ife;
+            $tramite->observaciones = $request->observaciones;
+
+            $tramite->fecha_ini = Carbon::parse($request->fecha_ini)->format('Y-m-d H:i:s');
+
+            if (!isset($request->sin_fecha)) {
+                $tramite->fecha_fin = Carbon::parse($request->fecha_fin)->format('Y-m-d H:i:s');
+            }
+
+            if (isset($request->status)) {
+                $tramite->status = 0;
+            }else{
+                $tramite->status = 1;
+            }
+
             $tramite->updated_by = Auth::user()->id;
+            $tramite->created_at = Carbon::now()->format('Y-m-d H:i:s');
             $tramite->updated_at = Carbon::now()->format('Y-m-d H:i:s');
-            $tramite->rol_id = 2;
 
             if ($tramite->save()) {
                 //Mail::to($request->email)->send(new RegisterUserMail($tramite));
+
+                if ($request->file('foto')) {
+
+                    if(@getimagesize(asset($tramite->foto))){
+                        unlink($tramite->foto);
+                    }
+
+                    $path = Storage::disk('public')->put('images/storage/tramites', $request->file('foto'));
+                    $tramite->fill(['foto' => $path])->save();
+                }
 
                 return redirect()->route('tramites.index');
             }
@@ -224,7 +339,7 @@ class TramitesController extends Controller
     {
         $tramite = User::where('id', $id)->first();
 
-        if($tramite->delete()){
+        if ($tramite->delete()) {
 
             return redirect()->route('tramites.index');
         }
@@ -232,5 +347,39 @@ class TramitesController extends Controller
         return back()
             ->with('status', 'Por el momento no podemos realizar la acción solicitada, intente más tarde. (Code 100)')
             ->withInput();
+    }
+
+    public function export(Request $request)
+    {
+        $rules = [
+            'fecha_ini' => 'required|date_format:m/d/Y',
+            'fecha_fin' => 'required|date_format:m/d/Y'
+        ];
+
+        $messages = [
+            'fecha_ini.required' => 'La fecha inicial es requerida',
+            'fecha_ini.date_format' => 'El formato de la fecha inicial no es correcto',
+            'fecha_fin.required' => 'La fecha final es requerida',
+            'fecha_fin.date_format' => 'El formato de la fecha final no es correcto'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $fecha_ini = Carbon::parse($request->fecha_ini)->format('Y-m-d');
+        $fecha_fin = Carbon::parse($request->fecha_fin)->format('Y-m-d');
+
+        $data = [
+            "fecha_ini" => $fecha_ini,
+            "fecha_fin" => $fecha_fin,
+            "status" => $request->status,
+        ];
+
+        return Excel::download(new TramitesExport($data), 'tramites.xlsx');
     }
 }

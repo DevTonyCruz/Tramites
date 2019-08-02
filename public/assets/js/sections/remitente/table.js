@@ -23,73 +23,34 @@
             }
         ];
 
-        const buttons = [{
-            extend: 'copy',
-            text: 'Copiar',
-            title: $('h1').text(),
-            exportOptions: {
-                columns: ':not(.no-print)'
-            },
-            footer: true
-        }, {
-            extend: 'excel',
-            text: 'Excel',
-            title: $('h1').text(),
-            exportOptions: {
-                columns: ':not(.no-print)'
-            },
-            footer: true
-        }, {
-            extend: 'csv',
-            text: 'Csv',
-            title: $('h1').text(),
-            exportOptions: {
-                columns: ':not(.no-print)'
-            },
-            footer: true
-        }, {
-            extend: 'pdf',
-            text: 'Pdf',
-            title: $('h1').text(),
-            exportOptions: {
-                columns: ':not(.no-print)'
-            },
-            footer: true
-        }, {
-            extend: 'print',
-            text: 'Imprimir',
-            title: $('h1').text(),
-            exportOptions: {
-                columns: ':not(.no-print)'
-            },
-            footer: true,
-            autoPrint: true
-        }, {
-            text: 'Nuevo',
-            title: $('h1').text(),
-            action: function() {
-                window.location.href = URLNew;
-            },
-            className: 'btn btn-success',
-            footer: true
-        }];
-
         $('#remitente-list').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
             ajax: URLList,
             columns: columns,
-            dom: 'Bfrtip',
-            buttons: {
-                buttons: buttons,
-                dom: {
-                    container: {
-                        className: 'dt-buttons'
-                    },
-                    button: {
-                        className: 'btn btn-primary'
-                    }
+            language: {
+                sProcessing: "Procesando...",
+                sLengthMenu: "Mostrar _MENU_ registros",
+                sZeroRecords: "No se encontraron resultados",
+                sEmptyTable: "Ningún dato disponible en esta tabla",
+                sInfo: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+                sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
+                sInfoPostFix: "",
+                sSearch: "Buscar:",
+                sUrl: "",
+                sInfoThousands: ",",
+                sLoadingRecords: "Cargando...",
+                oPaginate: {
+                    sFirst: "Primero",
+                    sLast: "Último",
+                    sNext: "Siguiente",
+                    sPrevious: "Anterior"
+                },
+                oAria: {
+                    sSortAscending: ": Activar para ordenar la columna de manera ascendente",
+                    sSortDescending: ": Activar para ordenar la columna de manera descendente"
                 }
             }
         });

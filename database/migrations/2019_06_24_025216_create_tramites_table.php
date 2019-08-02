@@ -17,7 +17,7 @@ class CreateTramitesTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('appaterno');
-            $table->string('apmaterno');
+            $table->string('apmaterno')->nullable();
             $table->string('direccion');
             $table->string('interior')->nullable();
             $table->string('exterior');
@@ -25,7 +25,7 @@ class CreateTramitesTable extends Migration
             $table->string('telefono')->nullable();
             $table->string('email');
 
-            $table->string('secretaria')->nullable();
+            $table->string('seccional')->nullable();
             $table->string('demarcacion')->nullable();
             $table->string('distrito')->nullable();
             $table->string('simpatizante')->nullable();
@@ -36,6 +36,7 @@ class CreateTramitesTable extends Migration
             $table->longText('foto')->nullable();
             $table->string('ife')->nullable();
             $table->longText('observaciones')->nullable();
+            $table->integer('status');
             $table->integer('created_by');
             $table->integer('updated_by');
             $table->timestamp('fecha_ini')->nullable();

@@ -16,7 +16,7 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/css/base/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendors/css/base/elisyam-1.5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/css/base/elisyam-1.5.css') }}">
 
     @yield('pagecss')
 </head>
@@ -41,11 +41,13 @@
                     <!-- End Side Navbar -->
                 </div>
                 <!-- End Left Sidebar -->
-                <div class="content-inner">
+                <div class="content-inner active">
                     @yield('content')
                     <!-- End Container -->
                     <!-- Begin Page Footer-->
-                    @include('layouts.footer')
+
+                    <!-- @include('layouts.footer') -->
+
                     <!-- End Page Footer -->
                     <a href="#" class="go-top"><i class="la la-arrow-up"></i></a>
 

@@ -6,10 +6,10 @@
     <div class="row">
         <div class="page-header">
             <div class="d-flex align-items-center">
-                <h2 class="page-header-title">Tramites</h2>
+                <h2 class="page-header-title"><a href="{{ route('tramites.index') }}">Tramites</a></h2>
                 <div>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="ti ti-home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('tramites.index') }}"><i class="ti ti-home"></i></a></li>
                         <!--<li class="breadcrumb-item"><a href="#">Components</a></li>-->
                         <li class="breadcrumb-item active">Tramites</li>
                     </ul>
@@ -32,7 +32,7 @@
                                 <form class="form-horizontal" id="form-tramites" action="{{ url('tramites') }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
                                     @csrf
                                     <div class="section-title mt-5 mb-5">
-                                        <h4>Información de beneficiario</h4>
+                                        <h4>Información</h4>
                                     </div>
                                     <div class="form-group row mb-3">
                                         <div class="col-xl-4 mb-3">
@@ -61,7 +61,7 @@
                                             @endif
                                         </div>
                                         <div class="col-xl-4">
-                                            <label class="form-control-label">Apellido materno<span class="text-danger ml-2">*</span></label>
+                                            <label class="form-control-label">Apellido materno</label>
                                             <input type="text" id="apmaterno" name="apmaterno"
                                                     class="form-control{{ $errors->has('apmaterno') ? ' has-error' : '' }}"
                                                     placeholder="Ingrese su apellido materno"
@@ -111,7 +111,7 @@
                                     </div>
 
                                     <div class="section-title mt-5 mb-5">
-                                        <h4>Dirección de beneficiario</h4>
+                                        <h4>Dirección</h4>
                                     </div>
                                     <div class="form-group row mb-3">
                                         <div class="col-xl-6 mb-3">
@@ -196,14 +196,14 @@
                                     </div>
                                     <div class="form-group row mb-3">
                                         <div class="col-xl-4 mb-3">
-                                            <label for="secretaria" class="form-control-label">Secretaría<span class="text-danger ml-2">*</span></label>
-                                            <input type="text" id="secretaria" name="secretaria"
-                                            class="form-control{{ $errors->has('secretaria') ? ' has-error' : '' }}"
-                                            placeholder="Ingrese una secretaria"
-                                            value="{{ old('secretaria') }}" required>
-                                            @if ($errors->has('secretaria'))
+                                            <label for="seccional" class="form-control-label">Seccional<span class="text-danger ml-2">*</span></label>
+                                            <input type="text" id="seccional" name="seccional"
+                                            class="form-control{{ $errors->has('seccional') ? ' has-error' : '' }}"
+                                            placeholder="Ingrese una seccional"
+                                            value="{{ old('seccional') }}" required>
+                                            @if ($errors->has('seccional'))
                                                 <span class="invalid-feedback d-block" role="alert">
-                                                    <strong>{{ $errors->first('secretaria') }}</strong>
+                                                    <strong>{{ $errors->first('seccional') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -232,7 +232,7 @@
                                             @endif
                                         </div>
                                         <div class="col-xl-4 mb-3">
-                                            <label for="simpatizante" class="form-control-label">Simpatizante<span class="text-danger ml-2">*</span></label>
+                                            <label for="simpatizante" class="form-control-label">Simpatizante</label>
                                             <input type="text" id="simpatizante" name="simpatizante"
                                             class="form-control{{ $errors->has('simpatizante') ? ' has-error' : '' }}"
                                             placeholder="Ingrese el simpatizante"
@@ -245,27 +245,38 @@
                                         </div>
                                         <div class="col-xl-4 mb-3">
                                             <label class="form-control-label">Gestión<span class="text-danger ml-2">*</span></label>
-                                            <select class="form-control"
+                                            <select class="form-control{{ $errors->has('gestion') ? ' has-error' : '' }}"
                                                     id="gestion" name="gestion"
                                                     require>
                                                 <option value="S">Seleccionar</option>
 
                                                 @foreach ($gestiones as $gestion)
-                                                    <option value="{{ $gestion->id }}">{{ $gestion->nombre }}</option>
+                                                    <option value="{{ $gestion->id }}" {{ (old('gestion') == $gestion->id) ? 'selected' : '' }}>{{ $gestion->nombre }}</option>
                                                 @endforeach
 
+                                                @if ($errors->has('gestion'))
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $errors->first('gestion') }}</strong>
+                                                    </span>
+                                                @endif
                                             </select>
                                         </div>
                                         <div class="col-xl-4 mb-3">
                                             <label class="form-control-label">Remitente<span class="text-danger ml-2">*</span></label>
-                                            <select class="form-control"
+                                            <select class="form-control{{ $errors->has('remitente') ? ' has-error' : '' }}"
                                                     id="remitente" name="remitente"
                                                     require>
                                                     <option value="S">Seleccionar</option>
 
                                                     @foreach ($remitentes as $remitente)
-                                                        <option value="{{ $remitente->id }}">{{ $remitente->nombre . ' ' . $remitente->appaterno . ' ' . $remitente->apmaterno }}</option>
+                                                        <option value="{{ $remitente->id }}" {{ (old('remitente') == $remitente->id) ? 'selected' : '' }}>{{ $remitente->nombre . ' ' . $remitente->appaterno . ' ' . $remitente->apmaterno }}</option>
                                                     @endforeach
+
+                                                    @if ($errors->has('remitente'))
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $errors->first('remitente') }}</strong>
+                                                        </span>
+                                                    @endif
                                             </select>
                                         </div>
                                         <div class="col-xl-5">
@@ -275,7 +286,14 @@
                                                     <span class="input-group-addon addon-secondary">
                                                         <i class="la la-calendar"></i>
                                                     </span>
-                                                    <input type="text" class="form-control datepicker" placeholder="Seleccione una fecha" name="fecha_ini" id="fecha_ini">
+                                                    <input type="text" name="fecha_ini" id="fecha_ini"
+                                                            class="form-control datepicker{{ $errors->has('fecha_ini') ? ' has-error' : '' }}">
+
+                                                    @if ($errors->has('fecha_ini'))
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $errors->first('fecha_ini') }}</strong>
+                                                        </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -286,7 +304,14 @@
                                                     <span class="input-group-addon addon-secondary">
                                                         <i class="la la-calendar"></i>
                                                     </span>
-                                                    <input type="text" class="form-control datepicker" placeholder="Seleccione una fecha" name="fecha_fin" id="fecha_fin">
+                                                    <input type="text" name="fecha_fin" id="fecha_fin"
+                                                            class="form-control datepicker{{ $errors->has('fecha_ini') ? ' has-error' : '' }}">
+
+                                                    @if ($errors->has('fecha_fin'))
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $errors->first('fecha_fin') }}</strong>
+                                                        </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -296,12 +321,6 @@
                                                 <label for="sin_fecha">Sin fecha final</label>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="section-title mt-5 mb-5">
-                                        <h4>Apoyo solicitado</h4>
-                                    </div>
-                                    <div class="form-group row mb-3">
                                         <div class="col-xl-4 mb-3">
                                             <label for="ife" class="form-control-label">IFE<span class="text-danger ml-2">*</span></label>
                                             <input type="text" id="ife" name="ife"
@@ -327,14 +346,13 @@
                                             @endif
                                         </div>
                                         <div class="col-xl-4 mb-3">
-                                            <label for="ife" class="form-control-label">Fotografías<span class="text-danger ml-2">*</span></label>
+                                            <label for="foto" class="form-control-label">Fotografías</label>
                                             <input type="file" id="foto" name="foto"
-                                            class="form-control{{ $errors->has('ife') ? ' has-error' : '' }}"
-                                            placeholder="Ingrese datos de IFE"
-                                            value="{{ old('ife') }}" required>
-                                            @if ($errors->has('ife'))
+                                            class="form-control{{ $errors->has('foto') ? ' has-error' : '' }}"
+                                            value="{{ old('foto') }}" required>
+                                            @if ($errors->has('foto'))
                                                 <span class="invalid-feedback d-block" role="alert">
-                                                    <strong>{{ $errors->first('ife') }}</strong>
+                                                    <strong>{{ $errors->first('foto') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -384,6 +402,8 @@
 
 <script type="text/javascript">
     SepomexObject.getStates('tramites');
+    SepomexObject.getLocation('tramites', 'Nayarit', 'Tepic');
+    SepomexObject.getColonyByStateAndLocation('tramites', 'Nayarit', 'Tepic');
 
     $("#save-button").on('click', function(){
         $("#form-tramites").submit();

@@ -17,6 +17,25 @@
         </div>
     </div>
 
+    <div class="row flex-row">
+        <div class="col-xl-2 col-md-4 col-sm-12">
+            <a href="{{ Route('users.create') }}" class="w-100">
+            <div class="widget widget-12 bg-gradient-07 has-shadow">
+                <div class="widget-body">
+                    <div class="media">
+                        <div class="align-self-center ml-5 mr-5">
+                            <i class="ion-plus-round text-white"></i>
+                        </div>
+                        <div class="media-body align-self-center">
+                            <div class="title text-white">Nuevo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div>
+    </div>
+
     <div class="widget has-shadow">
         <div class="widget-header bordered no-actions d-flex align-items-center">
             <h4>Listado</h4>
@@ -57,11 +76,6 @@
 @section('pagescript')
 <script src="{{ asset('assets/vendors/js/datatables/datatables.min.js') }}"></script>
 <script src="{{ asset('assets/vendors/js/datatables/dataTables.buttons.min.js') }}"></script>
-
-<script src="{{ asset('assets/vendors/js/datatables/jszip.min.js') }}"></script>
-<script src="{{ asset('assets/vendors/js/datatables/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('assets/vendors/js/datatables/pdfmake.min.js') }}"></script>
-<script src="{{ asset('assets/vendors/js/datatables/buttons.print.min.js') }}"></script>
 
 <script type="text/javascript">
     let URLList     = "{{ url('api/list/users') }}";
