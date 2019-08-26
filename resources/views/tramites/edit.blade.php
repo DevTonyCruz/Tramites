@@ -101,7 +101,7 @@
                                                 <input type="text" id="phone" name="phone"
                                                         class="form-control{{ $errors->has('phone') ? ' has-error' : '' }}"
                                                         placeholder="Ingrese su teléfono"
-                                                        value="{{ $tramite->telefono }}">
+                                                        value="{{ $tramite->telefono }}" max="15">
                                                 @if ($errors->has('phone'))
                                                     <span class="invalid-feedback d-block" role="alert">
                                                         <strong>{{ $errors->first('phone') }}</strong>
@@ -331,7 +331,7 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-4 mb-3">
-                                            <label for="ife" class="form-control-label">IFE<span class="text-danger ml-2">*</span></label>
+                                            <label for="ife" class="form-control-label">IFE</label>
                                             <input type="text" id="ife" name="ife"
                                             class="form-control{{ $errors->has('ife') ? ' has-error' : '' }}"
                                             placeholder="Ingrese datos de IFE"
@@ -343,11 +343,11 @@
                                             @endif
                                         </div>
                                         <div class="col-xl-4 mb-3">
-                                            <label for="cantidad" class="form-control-label">Cantidad<span class="text-danger ml-2">*</span></label>
+                                            <label for="cantidad" class="form-control-label">Cantidad</label>
                                             <input type="text" id="cantidad" name="cantidad"
                                             class="form-control{{ $errors->has('cantidad') ? ' has-error' : '' }}"
                                             placeholder="Ingrese una cantidad"
-                                            value="{{ $tramite->cantidad }}" required>
+                                            value="{{ $tramite->cantidad }}">
                                             @if ($errors->has('cantidad'))
                                                 <span class="invalid-feedback d-block" role="alert">
                                                     <strong>{{ $errors->first('cantidad') }}</strong>
@@ -366,7 +366,7 @@
                                             @endif
                                         </div>
                                         <div class="col-xl-12 mb-3">
-                                            <label for="observaciones" class="form-control-label">Observaciones<span class="text-danger ml-2">*</span></label>
+                                            <label for="observaciones" class="form-control-label">Observaciones</label>
                                             <textarea type="text" id="observaciones" name="observaciones"
                                             class="form-control{{ $errors->has('observaciones') ? ' has-error' : '' }}"
                                             placeholder="Ingrese alguna observacíon" required>{{ $tramite->observaciones }}</textarea>
@@ -383,8 +383,8 @@
                                             @endif
                                         </div>
                                         <div class="col-xl-6 mb-3">
-                                            <label for="observaciones" class="form-control-label">Creado por: <b>{{ $tramite->createdby->nombre . ' ' . $tramite->createdby->appaterno . ' ' . $tramite->createdby->apmaterno }}</b></label><br>
-                                            <label for="observaciones" class="form-control-label">Actualizado por: <b>{{ $tramite->updatedby->nombre . ' ' . $tramite->updatedby->appaterno . ' ' . $tramite->updatedby->apmaterno }}</b></label>
+                                            <label for="observaciones" class="form-control-label">Creado por: <b>{{ $tramite->createdby->name . ' ' . $tramite->createdby->first_last_name . ' ' . $tramite->createdby->second_last_name }}</b></label><br>
+                                            <label for="observaciones" class="form-control-label">Actualizado por: <b>{{ $tramite->updatedby->name . ' ' . $tramite->updatedby->first_last_name . ' ' . $tramite->updatedby->second_last_name }}</b></label>
                                         </div>
                                         <div class="col-xl-12 mb-3 text-right">
                                             <button type="button" class="btn btn-info mr-1 mb-2" id="save-button"><i class="la la-save"></i>Guardar</button>
@@ -414,21 +414,29 @@
 <script src="{{ asset('assets/vendors/js/datepicker/moment.min.js') }}"></script>
 <script src="{{ asset('assets/vendors/js/datepicker/daterangepicker.js') }}"></script>
 <script src="{{ asset('assets/js/components/datepicker/datepicker.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+
 <script src="{{ asset('assets/js/general/sepomex.js') }}"></script>
 <script src="{{ asset('assets/js/general/request.js') }}"></script>
 <script src="{{ asset('assets/js/general/tramites.js') }}"></script>
 
 <script type="text/javascript">
-    @if(!is_null($tramite->sepomex_id))
+
+
     $(document).ready(function(){
-        SepomexObject.searchZipSelectedEditing('tramites', '{{ $tramite->sepomex->zip_code }}', {{ $tramite->sepomex_id }});
-        SepomexObject.getStates('tramites');
+
+        $('#phone').mask('00-00-00-00-00');
+
+        @if(!is_null($tramite->sepomex_id))
+            SepomexObject.searchZipSelectedEditing('tramites', '{{ $tramite->sepomex->zip_code }}', {{ $tramite->sepomex_id }});
+            SepomexObject.getStates('tramites');
+        @else
+            SepomexObject.getStates('tramites');
+            SepomexObject.getLocation('tramites', 'Nayarit', 'Tepic');
+            SepomexObject.getColonyByStateAndLocation('tramites', 'Nayarit', 'Tepic');
+        @endif
     })
-    @else
-        SepomexObject.getStates('tramites');
-        SepomexObject.getLocation('tramites', 'Nayarit', 'Tepic');
-        SepomexObject.getColonyByStateAndLocation('tramites', 'Nayarit', 'Tepic');
-    @endif
 
     $("#save-button").on('click', function(){
         $("#form-tramites").submit();

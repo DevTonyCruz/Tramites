@@ -66,16 +66,15 @@
     <script src="{{ asset('assets/vendors/js/app/app.js') }}"></script>
     <script src="{{ asset('assets/js/general/initial.js') }}"></script>
 
+    @yield('pagescript')
+
     @if (session('status'))
     <script type="text/javascript">
-        $(document).ready(function(){
+
+        window.onload = function(){
             $("#modal-form-errors").modal();
-        });
-
-
+        }
     </script>
     @endif
-
-    @yield('pagescript')
 </body>
 </html>

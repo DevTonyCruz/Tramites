@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Remitente;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
+use App\Models\Tramites;
 
 class RemitenteController extends Controller
 {
@@ -143,15 +144,21 @@ class RemitenteController extends Controller
 
     public function destroy($id)
     {
-        $remitente = Remitente::where('id', $id)->first();
+        $tramites = Tramites::where('remitente_id', $id)->count();
 
-        if($remitente->delete()){
+        if($tramites == 0){
+            $remitente = Remitente::where('id', $id)->first();
 
-            return redirect()->route('remitente.index');
+            if($remitente->delete()){
+
+                return redirect()->route('remitente.index');
+            }
+
+            return back()
+                ->with('status', 'Por el momento no podemos realizar la acción solicitada, intente más tarde. (Code 100)');
+        }else{
+
+            return back()->with('status', 'No es posible borrar este remitente ya que existen tramites relacionados a el.');
         }
-
-        return back()
-            ->with('status', 'Por el momento no podemos realizar la acción solicitada, intente más tarde. (Code 100)')
-            ->withInput();
     }
 }

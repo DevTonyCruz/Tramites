@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionSeeder::class);
         $this->call(RelationRolPermissionSeeder::class);
         $this->call(SepomexSeeder::class);
+        $this->call(DirectorioSeeder::class);
         //$this->call(ConfigurationSeeder::class);
     }
 }

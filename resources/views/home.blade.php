@@ -11,7 +11,7 @@
                 <div class="widget-body text-center">
                     <div class="title text-grey-dark"><small>BIENVENIDO</small></div>
                     <div class="title text-grey-dark">{{ Auth::user()->name . ' ' . Auth::user()->first_last_name . ' ' . Auth::user()->second_last_name }}</div>
-                    <div class="title text-grey">Tramites</div>
+                    <div class="title text-grey">{{ Auth::user()->rol->name }}</div>
                 </div>
             </div>
         </div>
@@ -29,11 +29,11 @@
             </a>
         </div>
         <div class="col-xl-4 col-md-6">
-            <a href="{{ url('/tramites') }}" class="w-100">
+            <a href="{{ url('/directorio') }}" class="w-100">
                 <div class="widget widget-23 bg-gradient-07 d-flex justify-content-center align-items-center">
                     <div class="widget-body text-center">
                         <i class="ti ti-folder text-light"></i>
-                        <div class="title">MÓDULO 2</div>
+                        <div class="title">DIRECTORIO</div>
                     </div>
                 </div>
             </a>

@@ -26,12 +26,12 @@ class Tramites extends Model
 
     public function createdby()
     {
-        return $this->hasOne('App\Models\Tramites', 'id', 'created_by');
+        return $this->hasOne('App\User', 'id', 'created_by');
     }
 
     public function updatedby()
     {
-        return $this->hasOne('App\Models\Tramites', 'id', 'updated_by');
+        return $this->hasOne('App\User', 'id', 'updated_by');
     }
 
     public function scopeDates($query, $dates)

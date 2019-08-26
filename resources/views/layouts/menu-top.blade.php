@@ -25,10 +25,10 @@
             <!-- Begin Navbar Menu -->
             <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center pull-right">
                 <!-- User -->
-                <li class="nav-item dropdown"><a id="user" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><img src="assets/img/avatar/avatar-01.jpg" alt="..." class="avatar rounded-circle"></a>
+                <li class="nav-item dropdown"><a id="user" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><img src="{{ asset('assets/img/avatar/avatar-01.jpg') }}" alt="..." class="avatar rounded-circle"></a>
                     <ul aria-labelledby="user" class="user-size dropdown-menu">
                         <li class="welcome">
-                            <img src="assets/img/avatar/avatar-01.jpg" alt="..." class="rounded-circle">
+                            <img src="{{ asset('assets/img/avatar/avatar-01.jpg') }}" alt="..." class="rounded-circle">
                         </li>
                         <li>
                             <a href="pages-profile.html" class="dropdown-item">

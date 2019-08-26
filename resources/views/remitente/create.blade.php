@@ -8,7 +8,7 @@
                 <h2 class="page-header-title">Remitente</h2>
                 <div>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="db-default.html"><i class="ti ti-user"></i></a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0)"><i class="ti ti-user"></i></a></li>
                         <li class="breadcrumb-item"><a href="{{ url('/users') }}">Remitente</a></li>
                         <li class="breadcrumb-item active">Nuevo</li>
                     </ul>

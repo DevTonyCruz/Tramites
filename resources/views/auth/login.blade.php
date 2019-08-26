@@ -23,7 +23,7 @@
                 <!-- Begin Form -->
                 <div class="authentication-form mx-auto">
                     <div class="logo-centered">
-                        <a href="db-default.html">
+                        <a href="javascript:void(0)">
                             <img src="{{ asset('assets/img/logo.png') }}" alt="logo">
                         </a>
                     </div>

@@ -8,7 +8,7 @@
                 <h2 class="page-header-title">Usuarios</h2>
                 <div>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="db-default.html"><i class="ti ti-user"></i></a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0)"><i class="ti ti-user"></i></a></li>
                         <li class="breadcrumb-item"><a href="{{ url('/users') }}">Usuarios</a></li>
                         <li class="breadcrumb-item active">Listado</li>
                     </ul>
@@ -19,15 +19,15 @@
 
     <div class="row flex-row">
         <div class="col-xl-2 col-md-4 col-sm-12">
-            <a href="{{ Route('users.create') }}" class="w-100">
+            <a href="{{ Route('users.create') }}" class="w-100" title="Agregar registro">
             <div class="widget widget-12 bg-gradient-07 has-shadow">
                 <div class="widget-body">
-                    <div class="media">
-                        <div class="align-self-center ml-5 mr-5">
+                    <div class="media d-block">
+                        <div class="align-self-center m-auto text-center">
                             <i class="ion-plus-round text-white"></i>
                         </div>
-                        <div class="media-body align-self-center">
-                            <div class="title text-white">Nuevo</div>
+                        <div class="media-body align-self-center text-center">
+                            <div class="title text-white">Agregar registro</div>
                         </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
         </div>
         <div class="widget-body">
             <div class="table-responsive">
-                <table id="users-list" class="table mb-0">
+                <table id="datatable" class="table mb-0">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -52,6 +52,24 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        @foreach ($users as $user)
+                        <tr>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name . ' ' . $user->first_last_name . ' ' . $user->second_last_name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->phone }}</td>
+                            <td class="td-actions">
+                                <a href="{{ url('users/' . $user->id) }}" title="Editar"> <i class="la la-edit edit"></i></a>
+                                <a href="{{ url('users/password/' . $user->id) }}" title="Cambiar contraseña"> <i class="la la-key edit"></i></a>
+                                <a href="javascript:void(0)" onclick="ObjectForms.FormsAddAction('form_delete', '{{ url('users/' . $user->id) }}');" title="Eliminar">
+                                    <i class="la la-trash delete"></i>
+                                </a>
+
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>

@@ -8,7 +8,7 @@
                 <h2 class="page-header-title">Tramites</h2>
                 <div>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="db-default.html"><i class="ti ti-user"></i></a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0)"><i class="ti ti-user"></i></a></li>
                         <li class="breadcrumb-item"><a href="{{ url('/tramites') }}">Tramites</a></li>
                         <li class="breadcrumb-item active">Listado</li>
                     </ul>
@@ -19,15 +19,15 @@
 
     <div class="row flex-row">
             <div class="col-xl-2 col-md-4 col-sm-12">
-                <a href="{{ Route('tramites.create') }}" class="w-100">
+                <a href="{{ Route('tramites.create') }}" class="w-100" title="Agregar registro">
                 <div class="widget widget-12 bg-gradient-07 has-shadow">
                     <div class="widget-body">
-                        <div class="media">
-                            <div class="align-self-center ml-5 mr-5">
+                        <div class="media d-block">
+                            <div class="align-self-center m-auto text-center">
                                 <i class="ion-plus-round text-white"></i>
                             </div>
-                            <div class="media-body align-self-center">
-                                <div class="title text-white">Nuevo</div>
+                            <div class="media-body align-self-center text-center">
+                                <div class="title text-white">Agregar registro</div>
                             </div>
                         </div>
                     </div>
@@ -36,15 +36,15 @@
             </div>
 
             <div class="col-xl-2 col-md-4 col-sm-12">
-                <a href="javascript:void(0)" class="w-100" data-toggle="modal" data-target="#modal-centered">
+                <a href="javascript:void(0)" class="w-100" data-toggle="modal" data-target="#modal-centered" title="Descargar registros">
                 <div class="widget widget-12 bg-gradient-02 has-shadow">
                     <div class="widget-body">
-                        <div class="media">
-                            <div class="align-self-center ml-5 mr-5">
+                        <div class="media d-block">
+                            <div class="align-self-center m-auto text-center">
                                 <i class="ion-code-download text-white"></i>
                             </div>
-                            <div class="media-body align-self-center">
-                                <div class="title text-white">Descargar</div>
+                            <div class="media-body align-self-center text-center">
+                                <div class="title text-white">Descargar registros</div>
                             </div>
                         </div>
                     </div>
@@ -52,64 +52,60 @@
                 </a>
             </div>
 
-            <div class="col-xl-2 col-md-4 col-sm-12">
+            <div class="col-xl-2 col-md-4 col-sm-12" title="Registros en tramite: {{ $entramite }}">
                 <div class="widget widget-12 bg-gradient-success has-shadow">
                     <div class="widget-body">
-                        <div class="media">
-                            <div class="align-self-center ml-5 mr-5">
+                        <div class="media d-block">
+                            <div class="align-self-center m-auto text-center">
                                 <i class="ion-compose text-white"></i>
                             </div>
-                            <div class="media-body align-self-center">
-                                <div class="title text-white">En tramite</div>
-                                <div class="number text-white">{{ $entramite }} Registros</div>
+                            <div class="media-body align-self-center text-center">
+                                <div class="title text-white">Registros en tramite: {{ $entramite }} </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xl-2 col-md-4 col-sm-12">
+            <div class="col-xl-2 col-md-4 col-sm-12" title="Registros cerrados: {{ $cerrados }} ">
                 <div class="widget widget-12 bg-gradient-dark has-shadow">
                     <div class="widget-body">
-                        <div class="media">
-                            <div class="align-self-center ml-5 mr-5">
+                        <div class="media d-block">
+                            <div class="align-self-center m-auto text-center">
                                 <i class="ion-checkmark text-white"></i>
                             </div>
-                            <div class="media-body align-self-center">
-                                <div class="title text-white">Cerrados</div>
-                                <div class="number text-white">{{ $cerrados }} Registros</div>
+                            <div class="media-body align-self-center text-center">
+                                <div class="title text-white">Registros cerrados: {{ $cerrados }} </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xl-2 col-md-4 col-sm-12">
+            <div class="col-xl-2 col-md-4 col-sm-12" title="Registros por vence: {{ $porvencer }}">
                 <div class="widget widget-12 bg-gradient-warning has-shadow">
                     <div class="widget-body">
-                        <div class="media">
-                            <div class="align-self-center ml-5 mr-5">
+                        <div class="media d-block">
+                            <div class="align-self-center m-auto text-center">
                                 <i class="ion-alert text-white"></i>
                             </div>
-                            <div class="media-body align-self-center">
-                                <div class="title text-white">Avisos</div>
-                                <div class="number text-white">{{ $porvencer }} Registros</div>
+                            <div class="media-body align-self-center text-center">
+                                <div class="title text-white">Registros por vencer: {{ $porvencer }} </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xl-2 col-md-4 col-sm-12">
+            <div class="col-xl-2 col-md-4 col-sm-12" title="Registros vencidos: {{ $vencidos }}">
                 <div class="widget widget-12 bg-gradient-danger has-shadow">
                     <div class="widget-body">
-                        <div class="media">
-                            <div class="align-self-center ml-5 mr-5">
+                        <div class="media d-block">
+                            <div class="align-self-center m-auto text-center">
                                 <i class="ion-alert-circled text-white"></i>
                             </div>
-                            <div class="media-body align-self-center">
-                                <div class="title text-white">Vencidos</div>
-                                <div class="number text-white">{{ $vencidos }} Registros</div>
+                            <div class="media-body align-self-center text-center">
+                                <div class="title text-white">Registros vencidos:  {{ $vencidos }}</div>
                             </div>
                         </div>
                     </div>
@@ -129,8 +125,8 @@
                             <th>ID</th>
                             <th>Nombre</th>
                             <th>Estatus</th>
-                            <th>fecha inicial</th>
-                            <th>fecha final</th>
+                            <th>Fecha inicial</th>
+                            <th>Fecha final</th>
                             <th>Acciones</th>
                             <th>nombre</th>
                             <th>appaterno</th>
@@ -195,7 +191,7 @@
                                         <option value="S" selected disabled>Seleccionar estatus</option>
                                         <option value="T">Todos</option>
                                         <option value="E">En tramite</option>
-                                        <option value="C">Cerrados</option>
+                                        <option value="C">Finalizados</option>
                                         <option value="P">Por vencer</option>
                                         <option value="V">Vencidos</option>
                                     </select>

@@ -92,7 +92,7 @@ class TramitesController extends Controller
             'name' => 'required',
             'appaterno' => 'required',
             'email' => 'email',
-            'phone' => 'max:10',
+            'phone' => 'max:15',
             'direccion' => 'required',
             'exterior' => 'required',
             'sepomex_id' => 'required|numeric',
@@ -106,7 +106,6 @@ class TramitesController extends Controller
             'fecha_ini' => 'required',
 
             'ife' => 'max:50',
-            'cantidad' => 'required',
             'file' => 'mimes:png,jpeg,jpg',
         ];
 
@@ -116,7 +115,7 @@ class TramitesController extends Controller
             'direccion.required' => 'El campo calle es requerido',
             'exterior.required' => 'El campo número exterior es requerido',
             'email.email' => 'El campo email no es válido',
-            'phone.max:10' => 'El campo teléfono debe de contener como máximo 10 digitos',
+            'phone.max' => 'El campo teléfono debe de contener como máximo 10 digitos',
             'sepomex_id.required' => 'El código postal es requerido',
             'sepomex_id.numeric' => 'El código postal no es válido',
             'zip_code.required' => 'Debe seleccionar una colonia',
@@ -131,7 +130,6 @@ class TramitesController extends Controller
             'fecha_ini.required' => 'El campo fecha inicial es requerido',
 
             'ife.max' => 'El campo IFE debe de contener como máximo 50 digitos',
-            'cantidad.required' => 'El campo cantidad es requerido',
             'file.mimes' => 'El campo imagen no contiene un archvivo válido',
         ];
 
@@ -217,7 +215,7 @@ class TramitesController extends Controller
             'name' => 'required',
             'appaterno' => 'required',
             'email' => 'email',
-            'phone' => 'max:10',
+            'phone' => 'max:15',
             'direccion' => 'required',
             'exterior' => 'required',
             'exterior' => 'numeric',
@@ -231,7 +229,6 @@ class TramitesController extends Controller
             'fecha_ini' => 'required',
 
             'ife' => 'max:50',
-            'cantidad' => 'required',
             'file' => 'mimes:png,jpeg,jpg',
         ];
 
@@ -241,7 +238,7 @@ class TramitesController extends Controller
             'direccion.required' => 'El campo calle es requerido',
             'exterior.required' => 'El campo número exterior es requerido',
             'email.email' => 'El campo email no es válido',
-            'phone.max:10' => 'El campo télefono debe de contener como máximo 10 digitos',
+            'phone.max' => 'El campo télefono debe de contener como máximo 10 digitos',
             'sepomex_id.required' => 'El código postal es requerido',
             'sepomex_id.numeric' => 'El código postal no es válido',
             'zip_code.required' => 'Debe seleccionar una colonia',
@@ -256,7 +253,6 @@ class TramitesController extends Controller
             'fecha_ini.required' => 'El campo fecha inicial es requerido',
 
             'ife.max' => 'El campo IFE debe de contener como máximo 50 digitos',
-            'cantidad.required' => 'El campo cantidad es requerido',
             'file.mimes' => 'El campo imagen no contiene un archvivo válido',
         ];
 
@@ -296,6 +292,8 @@ class TramitesController extends Controller
 
             if (!isset($request->sin_fecha)) {
                 $tramite->fecha_fin = Carbon::parse($request->fecha_fin)->format('Y-m-d H:i:s');
+            }else{
+                $tramite->fecha_fin = null;
             }
 
             if (isset($request->status)) {
@@ -337,7 +335,7 @@ class TramitesController extends Controller
 
     public function destroy($id)
     {
-        $tramite = User::where('id', $id)->first();
+        $tramite = Tramites::where('id', $id)->first();
 
         if ($tramite->delete()) {
 
@@ -345,8 +343,7 @@ class TramitesController extends Controller
         }
 
         return back()
-            ->with('status', 'Por el momento no podemos realizar la acción solicitada, intente más tarde. (Code 100)')
-            ->withInput();
+            ->with('status', 'Por el momento no podemos realizar la acción solicitada, intente más tarde. (Code 100)');
     }
 
     public function export(Request $request)

@@ -8,7 +8,7 @@
                 <h2 class="page-header-title">gestion</h2>
                 <div>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="db-default.html"><i class="ti ti-user"></i></a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0)"><i class="ti ti-user"></i></a></li>
                         <li class="breadcrumb-item"><a href="{{ url('/gestion') }}">gestion</a></li>
                         <li class="breadcrumb-item active">Editar</li>
                     </ul>
@@ -44,8 +44,7 @@
                         <div class="col-lg-9">
                             <textarea type="text" id="descripcion" name="descripcion"
                                     class="form-control{{ $errors->has('descripcion') ? ' has-error' : '' }}"
-                                    placeholder="Ingrese una descripción"
-                                    required>{{ $gestion->descripcion }}</textarea>
+                                    placeholder="Ingrese una descripción">{{ $gestion->descripcion }}</textarea>
                             @if ($errors->has('descripcion'))
                                 <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $errors->first('descripcion') }}</strong>

@@ -7,6 +7,7 @@ use App\Models\Gestion;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Tramites;
 
 class GestionController extends Controller
 {
@@ -128,15 +129,20 @@ class GestionController extends Controller
 
     public function destroy($id)
     {
-        $gestion = Gestion::where('id', $id)->first();
+        $tramites = Tramites::where('remitente_id', $id)->count();
 
-        if($gestion->delete()){
+        if ($tramites == 0) {
+            $gestion = Gestion::where('id', $id)->first();
 
-            return redirect()->route('gestion.index');
+            if ($gestion->delete()) {
+
+                return redirect()->route('gestion.index');
+            }
+
+            return back()->with('status', 'Por el momento no podemos realizar la acción solicitada, intente más tarde. (Code 100)');
+        }else{
+
+            return back()->with('status', 'No es posible borrar esta gestión ya que existen tramites relacionados a el.');
         }
-
-        return back()
-            ->with('status', 'Por el momento no podemos realizar la acción solicitada, intente más tarde. (Code 100)')
-            ->withInput();
     }
 }

@@ -24,7 +24,7 @@
                 <!-- Begin Form -->
                 <div class="authentication-form mx-auto">
                     <div class="logo-centered">
-                        <a href="db-default.html">
+                        <a href="javascript:void(0)">
                             <img src="assets/img/logo.png" alt="logo">
                         </a>
                     </div>
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <div class="sign-btn text-center">
-                        <a href="db-default.html" class="btn btn-lg btn-gradient-01">
+                        <a href="javascript:void(0)" class="btn btn-lg btn-gradient-01">
                             Create an account
                         </a>
                     </div>

@@ -58,7 +58,10 @@
                 defaultContent: "<i>--</i>",
                 render: function(data, type, row) {
                     var date = row.fecha_fin;
-                    return date.substring(0, 10);
+                    if(row.fecha_fin != null){
+                        return date.substring(0, 10);
+                    }
+                    return '--';
                 }
             }, {
                 name: 'actions',

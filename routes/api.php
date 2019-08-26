@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'list'], function () {
+    Route::get('roles','RolesController@list')->name('roles.list');
+
     Route::get('users','UsersController@list')->name('users.list');
     Route::get('gestion','GestionController@list')->name('gestion.list');
     Route::get('remitente','RemitenteController@list')->name('remitente.list');
@@ -27,4 +29,5 @@ Route::group(['prefix' => 'list'], function () {
     Route::get('grupos','GruposController@list')->name('grupos.list');
     Route::get('profesiones','ProfesionesController@list')->name('profesiones.list');
     Route::get('fechas','FechasController@list')->name('fechas.list');
+    Route::get('directorio','DirectorioController@list')->name('directorio.list');
 });

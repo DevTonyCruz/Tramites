@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Roles;
+use App\Models\Permissions;
+use App\Models\Relation_rol_permission;
+use App\User;
 
 class RolesController extends Controller
 {
     public function index()
     {
-        $roles = Roles::latest()->paginate(10);
-        return view('admin.roles.index', ["roles" => $roles]);
+        $roles = Roles::get();
+        return view('roles.index', ["roles" => $roles]);
     }
 
     public function list(){
@@ -19,7 +22,7 @@ class RolesController extends Controller
 
     public function create()
     {
-        return view('admin.roles.create');
+        return view('roles.create');
     }
 
     public function store(Request $request)
@@ -60,7 +63,7 @@ class RolesController extends Controller
     public function edit($id)
     {
         $rol = Roles::where('id', $id)->first();
-        return view('admin.roles.edit', ["rol" => $rol]);
+        return view('roles.edit', ["rol" => $rol]);
     }
 
     public function update(Request $request, $id)
@@ -87,7 +90,7 @@ class RolesController extends Controller
                 $rol = Roles::where('id', $id)->first();
 
                 $rol->name = $request->name;
-                $rol->description = $request->description;
+                $rol->description = $request->descripcion;
 
                 $rol->save();
 
@@ -100,11 +103,26 @@ class RolesController extends Controller
 
     public function destroy($id)
     {
+        $users = User::where('rol_id', $id)->count();
 
-        $rol = Roles::where('id', $id)->first();
-        $rol->delete();
+        if ($users == 0) {
 
-        return redirect()->route('roles.index');
+            try {
+                $rol = Roles::where('id', $id)->first();
+
+                if ($rol->delete()) {
+
+                    return redirect()->route('roles.index');
+                }
+
+                return back()->with('status', 'Por el momento no podemos realizar la acción solicitada, intente más tarde.');
+            } catch (QueryException $e) {
+                return back()->with('status', $e->getMessage());
+            }
+        }
+
+        return back()->with('status', 'No es posible borrar este rol ya que existen registros relacionados a el.');
+
     }
 
     public function status($id)
@@ -153,7 +171,7 @@ class RolesController extends Controller
 
         $permisos["permisos"] = $permissions->toArray();
 
-        return view('admin.roles.permission', ['permisos' => $permisos, 'id' => $id]);
+        return view('roles.permission', ['permisos' => $permisos, 'id' => $id]);
     }
 
     public function save_permission(Request $request, $id)

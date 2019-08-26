@@ -12,4 +12,35 @@ $(document).ready(function() {
         }
     });
 
+
+    if (typeof $.fn.dataTable !== 'undefined') {
+        $('#datatable').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            }
+        });
+    }
+
+});
+
+$('form').on('focus', 'input[type=number]', function(e) {
+    $(this).on('mousewheel.disableScroll', function(e) {
+        e.preventDefault()
+    })
+})
+$('form').on('blur', 'input[type=number]', function(e) {
+    $(this).off('mousewheel.disableScroll')
+})
+
+$('#select-all').click(function(event) {
+
+    if (this.checked) {
+        $(':checkbox').each(function() {
+            this.checked = true;
+        });
+    } else {
+        $(':checkbox').each(function() {
+            this.checked = false;
+        });
+    }
 });

@@ -8,7 +8,7 @@
                 <h2 class="page-header-title">Usuarios</h2>
                 <div>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="db-default.html"><i class="ti ti-user"></i></a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0)"><i class="ti ti-user"></i></a></li>
                         <li class="breadcrumb-item"><a href="{{ url('/users') }}">Usuarios</a></li>
                         <li class="breadcrumb-item active">Nuevo</li>
                     </ul>
@@ -84,6 +84,7 @@
                             @endif
                         </div>
                     </div>
+
                     <div class="form-group row d-flex align-items-center mb-5">
                         <label for="phone" class="col-lg-3 form-control-label">Teléfono</label>
                         <div class="col-lg-9 input-group">
@@ -101,6 +102,28 @@
                             @endif
                         </div>
                     </div>
+
+                    <div class="form-group row d-flex align-items-center mb-5">
+                        <label for="second-last-name" class="col-lg-3 form-control-label">Roles</label>
+                        <div class="col-lg-9">
+                            <select class="form-control{{ $errors->has('rol_id') ? ' has-error' : '' }}"
+                                    id="rol_id" name="rol_id"
+                                    require>
+                                <option value="S">Seleccionar</option>
+
+                                @foreach ($roles as $rol)
+                                    <option value="{{ $rol->id }}" {{ (old('rol_id') == $rol->id) ? 'selected' : '' }}>{{ $rol->name }}</option>
+                                @endforeach
+                            </select>
+
+                            @if ($errors->has('rol_id'))
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $errors->first('rol_id') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
                     <div class="form-group row d-flex align-items-center mb-5">
                         <label for="password" class="col-lg-3 form-control-label">Contraseña</label>
                         <div class="col-lg-9">
@@ -134,4 +157,14 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('pagescript')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#phone').mask('00-00-00-00-00');
+    });
+</script>
 @endsection

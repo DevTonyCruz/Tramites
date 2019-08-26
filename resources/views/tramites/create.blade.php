@@ -100,7 +100,7 @@
                                                 <input type="text" id="phone" name="phone"
                                                         class="form-control{{ $errors->has('phone') ? ' has-error' : '' }}"
                                                         placeholder="Ingrese su teléfono"
-                                                        value="{{ old('phone') }}">
+                                                        value="{{ old('phone') }}" max="10">
                                                 @if ($errors->has('phone'))
                                                     <span class="invalid-feedback d-block" role="alert">
                                                         <strong>{{ $errors->first('phone') }}</strong>
@@ -322,7 +322,7 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-4 mb-3">
-                                            <label for="ife" class="form-control-label">IFE<span class="text-danger ml-2">*</span></label>
+                                            <label for="ife" class="form-control-label">IFE</label>
                                             <input type="text" id="ife" name="ife"
                                             class="form-control{{ $errors->has('ife') ? ' has-error' : '' }}"
                                             placeholder="Ingrese datos de IFE"
@@ -334,11 +334,11 @@
                                             @endif
                                         </div>
                                         <div class="col-xl-4 mb-3">
-                                            <label for="cantidad" class="form-control-label">Cantidad<span class="text-danger ml-2">*</span></label>
+                                            <label for="cantidad" class="form-control-label">Cantidad</label>
                                             <input type="text" id="cantidad" name="cantidad"
                                             class="form-control{{ $errors->has('cantidad') ? ' has-error' : '' }}"
                                             placeholder="Ingrese una cantidad"
-                                            value="{{ old('cantidad') }}" required>
+                                            value="{{ old('cantidad') }}">
                                             @if ($errors->has('cantidad'))
                                                 <span class="invalid-feedback d-block" role="alert">
                                                     <strong>{{ $errors->first('cantidad') }}</strong>
@@ -357,7 +357,7 @@
                                             @endif
                                         </div>
                                         <div class="col-xl-12 mb-3">
-                                            <label for="observaciones" class="form-control-label">Observaciones<span class="text-danger ml-2">*</span></label>
+                                            <label for="observaciones" class="form-control-label">Observaciones</label>
                                             <textarea type="text" id="observaciones" name="observaciones"
                                             class="form-control{{ $errors->has('observaciones') ? ' has-error' : '' }}"
                                             placeholder="Ingrese alguna observacíon"
@@ -399,6 +399,7 @@
 <script src="{{ asset('assets/js/general/sepomex.js') }}"></script>
 <script src="{{ asset('assets/js/general/request.js') }}"></script>
 <script src="{{ asset('assets/js/general/tramites.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
 <script type="text/javascript">
     SepomexObject.getStates('tramites');
@@ -407,6 +408,10 @@
 
     $("#save-button").on('click', function(){
         $("#form-tramites").submit();
-    })
+    });
+
+    $(document).ready(function(){
+        $('#phone').mask('00-00-00-00-00');
+    });
 </script>
 @endsection
