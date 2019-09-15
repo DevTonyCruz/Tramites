@@ -122,6 +122,8 @@ class DirectorioController extends Controller
             $directorio->sepomex_id = $request->sepomex_id;
             $directorio->email = $request->email;
             $directorio->telefono = $request->phone;
+            $directorio->hobbie = $request->hobbie;
+            $directorio->trabajo = $request->trabajo;
 
             $directorio->facebook = $request->facebook;
             $directorio->instagram = $request->instagram;
@@ -238,6 +240,8 @@ class DirectorioController extends Controller
             $directorio->sepomex_id = $request->sepomex_id;
             $directorio->email = $request->email;
             $directorio->telefono = $request->phone;
+            $directorio->hobbie = $request->hobbie;
+            $directorio->trabajo = $request->trabajo;
 
             $directorio->facebook = $request->facebook;
             $directorio->instagram = $request->instagram;

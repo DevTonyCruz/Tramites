@@ -287,7 +287,8 @@
                                                         <i class="la la-calendar"></i>
                                                     </span>
                                                     <input type="text" name="fecha_ini" id="fecha_ini"
-                                                            class="form-control datepicker{{ $errors->has('fecha_ini') ? ' has-error' : '' }}">
+                                                            class="form-control datepicker{{ $errors->has('fecha_ini') ? ' has-error' : '' }}"
+                                                            value="{!! \Carbon\Carbon::parse(old('fecha_ini'))->format('m/d/Y') !!}">
 
                                                     @if ($errors->has('fecha_ini'))
                                                         <span class="invalid-feedback d-block" role="alert">
@@ -305,7 +306,8 @@
                                                         <i class="la la-calendar"></i>
                                                     </span>
                                                     <input type="text" name="fecha_fin" id="fecha_fin"
-                                                            class="form-control datepicker{{ $errors->has('fecha_ini') ? ' has-error' : '' }}">
+                                                            class="form-control datepicker{{ $errors->has('fecha_fin') ? ' has-error' : '' }}"
+                                                            value="{!! \Carbon\Carbon::parse(old('fecha_fin'))->format('m/d/Y') !!}">
 
                                                     @if ($errors->has('fecha_fin'))
                                                         <span class="invalid-feedback d-block" role="alert">
@@ -322,10 +324,10 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-4 mb-3">
-                                            <label for="ife" class="form-control-label">IFE</label>
+                                            <label for="ife" class="form-control-label">INE</label>
                                             <input type="text" id="ife" name="ife"
                                             class="form-control{{ $errors->has('ife') ? ' has-error' : '' }}"
-                                            placeholder="Ingrese datos de IFE"
+                                            placeholder="Ingrese datos de INE"
                                             value="{{ old('ife') }}" required>
                                             @if ($errors->has('ife'))
                                                 <span class="invalid-feedback d-block" role="alert">
@@ -360,8 +362,7 @@
                                             <label for="observaciones" class="form-control-label">Observaciones</label>
                                             <textarea type="text" id="observaciones" name="observaciones"
                                             class="form-control{{ $errors->has('observaciones') ? ' has-error' : '' }}"
-                                            placeholder="Ingrese alguna observacíon"
-                                            value="{{ old('observaciones') }}" required></textarea>
+                                            placeholder="Ingrese alguna observacíon" required>{{ old('observaciones') }}</textarea>
                                             @if ($errors->has('observaciones'))
                                                 <span class="invalid-feedback d-block" role="alert">
                                                     <strong>{{ $errors->first('observaciones') }}</strong>

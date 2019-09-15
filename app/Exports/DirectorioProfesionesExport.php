@@ -164,10 +164,7 @@ class DirectorioProfesionesExport implements FromQuery, WithMapping, WithHeading
             'T' => NumberFormat::FORMAT_DATE_DDMMYYYY,
         ];
     }
-
-    /**
-     * @return array
-     */
+    
     public function registerEvents(): array
     {
         $styleArray = [

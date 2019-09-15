@@ -331,10 +331,10 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-4 mb-3">
-                                            <label for="ife" class="form-control-label">IFE</label>
+                                            <label for="ife" class="form-control-label">INE</label>
                                             <input type="text" id="ife" name="ife"
                                             class="form-control{{ $errors->has('ife') ? ' has-error' : '' }}"
-                                            placeholder="Ingrese datos de IFE"
+                                            placeholder="Ingrese datos de INE"
                                             value="{{ $tramite->ife }}" required>
                                             @if ($errors->has('ife'))
                                                 <span class="invalid-feedback d-block" role="alert">

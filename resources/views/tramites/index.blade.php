@@ -184,7 +184,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-row align-items-center">
+                            <div class="form-row align-items-center mb-3">
                                 <div class="col-12">
                                     <label class="sr-only" for="inlineFormInput">Estatus</label>
                                     <select name="status" id="status" class="form-control">
@@ -195,6 +195,14 @@
                                         <option value="P">Por vencer</option>
                                         <option value="V">Vencidos</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-row align-items-center">
+                                <div class="col-6">
+                                    <div class="styled-checkbox">
+                                        <input type="checkbox" name="sin_fecha" id="sin_fecha" value="1">
+                                        <label for="sin_fecha">Omitir fecha</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>

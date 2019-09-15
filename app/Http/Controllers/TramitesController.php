@@ -91,7 +91,7 @@ class TramitesController extends Controller
         $rules = [
             'name' => 'required',
             'appaterno' => 'required',
-            'email' => 'email',
+            //'email' => 'email',
             'phone' => 'max:15',
             'direccion' => 'required',
             'exterior' => 'required',
@@ -114,7 +114,7 @@ class TramitesController extends Controller
             'appaterno.required' => 'El campo apellido paterno es requerido',
             'direccion.required' => 'El campo calle es requerido',
             'exterior.required' => 'El campo número exterior es requerido',
-            'email.email' => 'El campo email no es válido',
+            //'email.email' => 'El campo email no es válido',
             'phone.max' => 'El campo teléfono debe de contener como máximo 10 digitos',
             'sepomex_id.required' => 'El código postal es requerido',
             'sepomex_id.numeric' => 'El código postal no es válido',
@@ -129,7 +129,7 @@ class TramitesController extends Controller
             'remitente.numeric' => 'El campo remitente no es válid',
             'fecha_ini.required' => 'El campo fecha inicial es requerido',
 
-            'ife.max' => 'El campo IFE debe de contener como máximo 50 digitos',
+            'ife.max' => 'El campo INE debe de contener como máximo 50 digitos',
             'file.mimes' => 'El campo imagen no contiene un archvivo válido',
         ];
 
@@ -214,7 +214,7 @@ class TramitesController extends Controller
         $rules = [
             'name' => 'required',
             'appaterno' => 'required',
-            'email' => 'email',
+            //'email' => 'email',
             'phone' => 'max:15',
             'direccion' => 'required',
             'exterior' => 'required',
@@ -237,7 +237,7 @@ class TramitesController extends Controller
             'appaterno.required' => 'El campo apellido paterno es requerido',
             'direccion.required' => 'El campo calle es requerido',
             'exterior.required' => 'El campo número exterior es requerido',
-            'email.email' => 'El campo email no es válido',
+            //'email.email' => 'El campo email no es válido',
             'phone.max' => 'El campo télefono debe de contener como máximo 10 digitos',
             'sepomex_id.required' => 'El código postal es requerido',
             'sepomex_id.numeric' => 'El código postal no es válido',
@@ -252,7 +252,7 @@ class TramitesController extends Controller
             'remitente.numeric' => 'El campo remitente no es válid',
             'fecha_ini.required' => 'El campo fecha inicial es requerido',
 
-            'ife.max' => 'El campo IFE debe de contener como máximo 50 digitos',
+            'ife.max' => 'El campo INE debe de contener como máximo 50 digitos',
             'file.mimes' => 'El campo imagen no contiene un archvivo válido',
         ];
 
@@ -348,33 +348,40 @@ class TramitesController extends Controller
 
     public function export(Request $request)
     {
-        $rules = [
-            'fecha_ini' => 'required|date_format:m/d/Y',
-            'fecha_fin' => 'required|date_format:m/d/Y'
-        ];
+        $fecha_ini = '';
+        $fecha_fin = '';
+        $sin_fecha = 1;
+        if(!$request->has('sin_fecha')){
+            $rules = [
+                'fecha_ini' => 'required|date_format:m/d/Y',
+                'fecha_fin' => 'required|date_format:m/d/Y'
+            ];
+    
+            $messages = [
+                'fecha_ini.required' => 'La fecha inicial es requerida',
+                'fecha_ini.date_format' => 'El formato de la fecha inicial no es correcto',
+                'fecha_fin.required' => 'La fecha final es requerida',
+                'fecha_fin.date_format' => 'El formato de la fecha final no es correcto'
+            ];
+    
+            $validator = Validator::make($request->all(), $rules, $messages);
+    
+            if ($validator->fails()) {
+                return back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
 
-        $messages = [
-            'fecha_ini.required' => 'La fecha inicial es requerida',
-            'fecha_ini.date_format' => 'El formato de la fecha inicial no es correcto',
-            'fecha_fin.required' => 'La fecha final es requerida',
-            'fecha_fin.date_format' => 'El formato de la fecha final no es correcto'
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
+            $fecha_ini = Carbon::parse($request->fecha_ini)->format('Y-m-d');
+            $fecha_fin = Carbon::parse($request->fecha_fin)->format('Y-m-d');
+            $sin_fecha = 0;
         }
-
-        $fecha_ini = Carbon::parse($request->fecha_ini)->format('Y-m-d');
-        $fecha_fin = Carbon::parse($request->fecha_fin)->format('Y-m-d');
 
         $data = [
             "fecha_ini" => $fecha_ini,
             "fecha_fin" => $fecha_fin,
             "status" => $request->status,
+            "sin_fecha" => $sin_fecha,
         ];
 
         return Excel::download(new TramitesExport($data), 'tramites.xlsx');

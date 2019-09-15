@@ -110,6 +110,33 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-group row mb-3">
+                                        <div class="col-xl-4 mb-3">
+                                            <label for="hobbie" class="form-control-label">Pasatiempos</label>
+                                            <input type="text" id="hobbie" name="hobbie"
+                                            class="form-control{{ $errors->has('hobbie') ? ' has-error' : '' }}"
+                                            placeholder="Ingrese algún pasatiempo"
+                                            value="{{ $directorio->hobbie }}" required>
+                                            @if ($errors->has('hobbie'))
+                                                <span class="invalid-feedback d-block" role="alert">
+                                                    <strong>{{ $errors->first('hobbie') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                        <div class="col-xl-4 mb-3">
+                                            <label class="form-control-label">Trabajo actual</label>
+                                            <input type="text" id="trabajo" name="trabajo"
+                                                    class="form-control{{ $errors->has('trabajo') ? ' has-error' : '' }}"
+                                                    placeholder="Ingrese un trabajo"
+                                                    value="{{ $directorio->trabajo }}" required>
+
+                                            @if ($errors->has('trabajo'))
+                                                <span class="invalid-feedback d-block" role="alert">
+                                                    <strong>{{ $errors->first('trabajo') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
 
                                     <div class="section-title mt-5 mb-5">
                                         <h4>Redes sociales</h4>
