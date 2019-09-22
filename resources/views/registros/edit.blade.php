@@ -44,8 +44,7 @@
                                                     class="text-danger ml-2">*</span></label>
                                             <input type="text" id="nombre" name="nombre"
                                                 class="form-control{{ $errors->has('nombre') ? ' has-error' : '' }}"
-                                                placeholder="Ingrese su nombre" value="{{ $registro->nombre }}"
-                                                required>
+                                                placeholder="Ingrese su nombre" value="{{ $registro->nombre }}" required>
                                             @if ($errors->has('nombre'))
                                             <span class="invalid-feedback d-block" role="alert">
                                                 <strong>{{ $errors->first('nombre') }}</strong>
@@ -55,26 +54,26 @@
                                         <div class="col-xl-4 mb-3">
                                             <label class="form-control-label">Apellido paterno<span
                                                     class="text-danger ml-2">*</span></label>
-                                            <input type="text" id="appaterno" name="appaterno"
-                                                class="form-control{{ $errors->has('appaterno') ? ' has-error' : '' }}"
+                                            <input type="text" id="apellido_paterno" name="apellido_paterno"
+                                                class="form-control{{ $errors->has('apellido_paterno') ? ' has-error' : '' }}"
                                                 placeholder="Ingrese su apellido paterno"
                                                 value="{{ $registro->apellido_paterno }}" required>
 
-                                            @if ($errors->has('appaterno'))
+                                            @if ($errors->has('apellido_paterno'))
                                             <span class="invalid-feedback d-block" role="alert">
-                                                <strong>{{ $errors->first('appaterno') }}</strong>
+                                                <strong>{{ $errors->first('apellido_paterno') }}</strong>
                                             </span>
                                             @endif
                                         </div>
                                         <div class="col-xl-4 mb-3">
                                             <label class="form-control-label">Apellido materno</label>
-                                            <input type="text" id="apmaterno" name="apmaterno"
-                                                class="form-control{{ $errors->has('apmaterno') ? ' has-error' : '' }}"
+                                            <input type="text" id="apellido_materno" name="apellido_materno"
+                                                class="form-control{{ $errors->has('apellido_materno') ? ' has-error' : '' }}"
                                                 placeholder="Ingrese su apellido materno"
                                                 value="{{ $registro->apellido_materno }}" required>
-                                            @if ($errors->has('apmaterno'))
+                                            @if ($errors->has('apellido_materno'))
                                             <span class="invalid-feedback d-block" role="alert">
-                                                <strong>{{ $errors->first('apmaterno') }}</strong>
+                                                <strong>{{ $errors->first('apellido_materno') }}</strong>
                                             </span>
                                             @endif
                                         </div>
@@ -84,9 +83,9 @@
                                             <select class="form-control" id="sexo" name="sexo">
                                                 <option value="S" disabled>
                                                     Seleccionar</option>
-                                                <option value="H" {{ ($registro->clave == 'H') ? 'selected' : '' }}>
+                                                <option value="H" {{ ($registro->sexo == 'H') ? 'selected' : '' }}>
                                                     Masculino</option>
-                                                <option value="M" {{ ($registro->clave == 'M') ? 'selected' : '' }}>
+                                                <option value="M" {{ ($registro->sexo == 'M') ? 'selected' : '' }}>
                                                     Femenino</option>
                                             </select>
                                         </div>
@@ -95,7 +94,7 @@
                                             <input type="text" id="clave" name="clave"
                                                 class="form-control{{ $errors->has('clave') ? ' has-error' : '' }}"
                                                 placeholder="Ingrese la clave del registro"
-                                                value="{{ $registro->clave }}" required>
+                                                value="{{ $registro->clave }}" >
                                             @if ($errors->has('clave'))
                                             <span class="invalid-feedback d-block" role="alert">
                                                 <strong>{{ $errors->first('clave') }}</strong>
@@ -111,7 +110,7 @@
                                                 <input type="text" id="email" name="email"
                                                     class="form-control{{ $errors->has('email') ? ' has-error' : '' }}"
                                                     placeholder="Ingrese su correo electrónico"
-                                                    value="{{ $registro->correo }}" required>
+                                                    value="{{ $registro->correo }}" >
                                                 @if ($errors->has('email'))
                                                 <span class="invalid-feedback d-block" role="alert">
                                                     <strong>{{ $errors->first('email') }}</strong>
@@ -161,7 +160,7 @@
                                             <input type="text" id="lugar_nacimiento" name="lugar_nacimiento"
                                                 class="form-control{{ $errors->has('lugar_nacimiento') ? ' has-error' : '' }}"
                                                 placeholder="Ingrese algún pasatiempo"
-                                                value="{{ $registro->lugar_nacimiento }}" required>
+                                                value="{{ $registro->lugar_nacimiento }}" >
                                             @if ($errors->has('lugar_nacimiento'))
                                             <span class="invalid-feedback d-block" role="alert">
                                                 <strong>{{ $errors->first('lugar_nacimiento') }}</strong>
@@ -292,7 +291,6 @@
                                                 <label class="form-control-label">Municipio<span
                                                         class="text-danger ml-2">*</span></label>
                                                 <select class="form-control location-data" id="city" name="city"
-                                                    onchange="SepomexObject.getColony('registros', this.value);"
                                                     disabled require>
                                                 </select>
                                             </div>
@@ -326,7 +324,7 @@
                                                         class="text-danger ml-2">*</span></label>
                                                 <input type="text" id="distrito" name="distrito"
                                                     class="form-control{{ $errors->has('distrito') ? ' has-error' : '' }}"
-                                                    placeholder="Ingrese el distrito" value="{{ $registro->distrito }}">
+                                                    placeholder="Ingrese el distrito" value="{{ $registro->distrito }}" required>
                                                 @if ($errors->has('distrito'))
                                                 <span class="invalid-feedback d-block" role="alert">
                                                     <strong>{{ $errors->first('distrito') }}</strong>
@@ -351,7 +349,7 @@
                                                         class="text-danger ml-2">*</span></label>
                                                 <input type="text" id="seccion" name="seccion"
                                                     class="form-control{{ $errors->has('seccion') ? ' has-error' : '' }}"
-                                                    placeholder="Ingrese la sección" value="{{ $registro->seccion }}">
+                                                    placeholder="Ingrese la sección" value="{{ $registro->seccion }}" required>
                                                 @if ($errors->has('seccion'))
                                                 <span class="invalid-feedback d-block" role="alert">
                                                     <strong>{{ $errors->first('seccion') }}</strong>
@@ -396,7 +394,7 @@
                                             <input type="text" id="simpatizante" name="simpatizante"
                                                 class="form-control{{ $errors->has('simpatizante') ? ' has-error' : '' }}"
                                                 placeholder="Ingrese un simpatizante"
-                                                value="{{ $registro->simpatizante }}" required>
+                                                value="{{ $registro->simpatizante }}" >
                                             @if ($errors->has('simpatizante'))
                                             <span class="invalid-feedback d-block" role="alert">
                                                 <strong>{{ $errors->first('simpatizante') }}</strong>
@@ -425,8 +423,9 @@
 <script src="{{ asset('assets/vendors/js/datepicker/moment.min.js') }}"></script>
 <script src="{{ asset('assets/vendors/js/datepicker/daterangepicker.js') }}"></script>
 <script src="{{ asset('assets/js/components/datepicker/datepicker.js') }}"></script>
+<script src="{{ asset('assets/js/general/sepomex.js') }}"></script>
 <script src="{{ asset('assets/js/general/request.js') }}"></script>
-<script src="{{ asset('assets/js/general/registros.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
 <script type="text/javascript">
     $("#save-button").on('click', function(){
@@ -435,5 +434,9 @@
 
     SepomexObject.getStates('registros');
     SepomexObject.getLocation('registros', 'Nayarit', 'Tepic');
+
+    $(document).ready(function(){
+        $('#phone').mask('00-00-00-00-00');
+    });
 </script>
 @endsection
