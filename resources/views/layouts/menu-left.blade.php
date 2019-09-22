@@ -12,7 +12,7 @@
             <ul id="dropdown-db" class="collapse list-unstyled {{ $show }} pt-0">
                 <li><a class="{{ (request()->is('users')) ? 'active' : '' }}" href="{{ url('/users') }}">Usuarios</a></li>
                 <li><a class="{{ (request()->is('roles')) ? 'active' : '' }}" href="{{ url('/roles') }}">Roles</a></li>
-                <li><a class="#" href="#">Configuraciones</a></li>
+                <li><a class="{{ (request()->is('configuration')) ? 'active' : '' }}" href="{{ url('/configuration') }}">Configuraciones</a></li>
             </ul>
         </li>
         @php
@@ -39,6 +39,17 @@
                 <li><a class="{{ (request()->is('directorio')) ? 'active' : '' }}" href="{{ url('/directorio') }}">Directorio</a></li>
                 <li><a class="{{ (request()->is('profesiones')) ? 'active' : '' }}" href="{{ url('/profesiones') }}">Profesiones</a></li>
                 <li><a class="{{ (request()->is('grupos')) ? 'active' : '' }}" href="{{ url('/grupos') }}">Grupos</a></li>
+            </ul>
+        </li>
+        @php
+            $show = '';
+            if(request()->is('registros')){
+                $show = 'show';
+            }
+        @endphp
+        <li><a href="#dropdown-app-registros" aria-expanded="false" data-toggle="collapse"><i class="la la-puzzle-piece"></i><span>Registros</span></a>
+            <ul id="dropdown-app-registros" class="collapse list-unstyled {{ $show }} pt-0">
+                <li><a class="{{ (request()->is('registros')) ? 'active' : '' }}" href="{{ url('/registros') }}">registros</a></li>
             </ul>
         </li>
     </ul>

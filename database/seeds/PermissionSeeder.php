@@ -97,6 +97,19 @@ class PermissionSeeder extends Seeder
             ['name' => 'Alertas','controller' => 'Directorio','slug' => 'directorio.alertas','created_at' => $date,'updated_at' => $date,],
             ['name' => 'Descargar por profesión','controller' => 'Tramites','slug' => 'directorio.exportProfesiones','created_at' => $date,'updated_at' => $date,],
             ['name' => 'Descargar por grupo','controller' => 'Tramites','slug' => 'directorio.exportGrupos','created_at' => $date,'updated_at' => $date,],
+            //registros
+            ['name' => 'Listado','controller' => 'Registros','slug' => 'registros.index','created_at' => $date,'updated_at' => $date,],
+            ['name' => 'Crear','controller' => 'Registros','slug' => 'registros.create','created_at' => $date,'updated_at' => $date,],
+            ['name' => 'Guardar','controller' => 'Registros','slug' => 'registros.store','created_at' => $date,'updated_at' => $date,],
+            ['name' => 'Editar','controller' => 'Registros','slug' => 'registros.edit','created_at' => $date,'updated_at' => $date,],
+            ['name' => 'Actualizar','controller' => 'Registros','slug' => 'registros.update','created_at' => $date,'updated_at' => $date,],
+            ['name' => 'Borrar','controller' => 'Registros','slug' => 'registros.destroy','created_at' => $date,'updated_at' => $date,],
+            ['name' => 'Estatus','controller' => 'Registros','slug' => 'registros.status','created_at' => $date,'updated_at' => $date,],
+            //nuevos
+            ['name' => 'Listado','controller' => 'Configuraciones','slug' => 'configuration.index','created_at' => $date,'updated_at' => $date,],
+            ['name' => 'Editar','controller' => 'Configuraciones','slug' => 'configuration.edit','created_at' => $date,'updated_at' => $date,],
+            ['name' => 'Actualizar','controller' => 'Configuraciones','slug' => 'configuration.update','created_at' => $date,'updated_at' => $date,],
+            
         ];
 
         DB::table('permissions')->truncate();

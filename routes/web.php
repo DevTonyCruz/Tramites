@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('/reinicio', 'Auth\LoginController@logout');
 
-Route::get('/clear-cache', function() {
+Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('config:clear');
     $exitCode = Artisan::call('cache:clear');
     $exitCode = Artisan::call('config:cache');
@@ -35,8 +35,8 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth', 'permission']], func
     Route::get('/{id}',         'UsersController@edit')->name('users.edit');
     Route::put('/{id}',         'UsersController@update')->name('users.update');
     Route::delete('/{id}',      'UsersController@destroy')->name('users.destroy');
-    Route::get('/password/{id}','UsersController@password')->name('users.password');
-    Route::put('/{id}/password','UsersController@updatePassword')->name('users.updatePassword');
+    Route::get('/password/{id}', 'UsersController@password')->name('users.password');
+    Route::put('/{id}/password', 'UsersController@updatePassword')->name('users.updatePassword');
 });
 
 Route::group(['prefix' => 'roles', 'middleware' => ['auth', 'permission']], function () {
@@ -131,4 +131,22 @@ Route::group(['prefix' => 'directorio', 'middleware' => ['auth', 'permission']],
     Route::get('/alertas',      'DirectorioController@alertas')->name('directorio.alertas');
     Route::post('/export-profesiones', 'DirectorioController@exportProfesiones')->name('directorio.exportProfesiones');
     Route::post('/export-grupos', 'DirectorioController@exportGrupos')->name('directorio.exportGrupos');
+});
+
+
+Route::group(['prefix' => 'registros', 'middleware' => ['auth', 'permission']], function () {
+    Route::get('/',             'RegistrosController@index')->name('registros.index');
+    Route::get('/create',       'RegistrosController@create')->name('registros.create');
+    Route::post('/',            'RegistrosController@store')->name('registros.store');
+    Route::get('/edit/{id}',    'RegistrosController@edit')->name('registros.edit');
+    Route::put('/{id}',         'RegistrosController@update')->name('registros.update');
+    Route::delete('/{id}',      'RegistrosController@destroy')->name('registros.destroy');
+});
+
+Route::group(['prefix' => 'configuration', 'middleware' => ['auth', 'permission']], function () {
+    Route::get('/', 'ConfigurationController@index')->name('configuration.index');
+    Route::get('/{id}', 'ConfigurationController@show')->name('configuration.show');
+    Route::get('/{id}/edit', 'ConfigurationController@edit')->name('configuration.edit');
+    Route::put('/{id}', 'ConfigurationController@update')->name('configuration.update');
+    Route::put('/status/{id}', 'ConfigurationController@status')->name('configuration.status');
 });

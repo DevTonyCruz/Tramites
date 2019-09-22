@@ -35,7 +35,7 @@
             <!-- End Header -->
             <!-- Begin Page Content -->
             <div class="page-content d-flex align-items-stretch">
-                <div class="default-sidebar">
+                <div class="default-sidebar" style="background: {{ $color_system }} !important;">
                     <!-- Begin Side Navbar -->
                     @include('layouts.menu-left')
                     <!-- End Side Navbar -->
