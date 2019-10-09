@@ -109,6 +109,14 @@ class PermissionSeeder extends Seeder
             ['name' => 'Listado','controller' => 'Configuraciones','slug' => 'configuration.index','created_at' => $date,'updated_at' => $date,],
             ['name' => 'Editar','controller' => 'Configuraciones','slug' => 'configuration.edit','created_at' => $date,'updated_at' => $date,],
             ['name' => 'Actualizar','controller' => 'Configuraciones','slug' => 'configuration.update','created_at' => $date,'updated_at' => $date,],
+            ['name' => 'Listado','controller' => 'Eventos','slug' => 'evento.index','created_at' => $date,'updated_at' => $date,],
+            ['name' => 'Crear','controller' => 'Eventos','slug' => 'evento.create','created_at' => $date,'updated_at' => $date,],
+            ['name' => 'Guardar','controller' => 'Eventos','slug' => 'evento.store','created_at' => $date,'updated_at' => $date,],
+            ['name' => 'Editar','controller' => 'Eventos','slug' => 'evento.edit','created_at' => $date,'updated_at' => $date,],
+            ['name' => 'Actualizar','controller' => 'Eventos','slug' => 'evento.update','created_at' => $date,'updated_at' => $date,],
+            ['name' => 'Borrar','controller' => 'Eventos','slug' => 'evento.destroy','created_at' => $date,'updated_at' => $date,],
+            ['name' => 'Estatus','controller' => 'Eventos','slug' => 'evento.status','created_at' => $date,'updated_at' => $date,],
+            ['name' => 'Listado eventos','controller' => 'Directorio','slug' => 'directorio.eventos','created_at' => $date,'updated_at' => $date,],
             
         ];
 

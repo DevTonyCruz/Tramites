@@ -30,7 +30,7 @@
         </li>
         @php
             $show = '';
-            if(request()->is('directorio') || request()->is('profesiones') || request()->is('grupos')){
+            if(request()->is('directorio') || request()->is('profesiones') || request()->is('grupos') || request()->is('eventos')){
                 $show = 'show';
             }
         @endphp
@@ -39,6 +39,7 @@
                 <li><a class="{{ (request()->is('directorio')) ? 'active' : '' }}" href="{{ url('/directorio') }}">Directorio</a></li>
                 <li><a class="{{ (request()->is('profesiones')) ? 'active' : '' }}" href="{{ url('/profesiones') }}">Profesiones</a></li>
                 <li><a class="{{ (request()->is('grupos')) ? 'active' : '' }}" href="{{ url('/grupos') }}">Grupos</a></li>
+                <li><a class="{{ (request()->is('eventos')) ? 'active' : '' }}" href="{{ url('/eventos') }}">Eventos</a></li>
             </ul>
         </li>
         @php

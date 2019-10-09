@@ -322,7 +322,61 @@ const SepomexObject = {
                     alert(err);
                 });
         }
-    }
+    },
+    getStatesByState: function(container, state) {
+
+        RequestObject.AjaxJson('POST', 'sepomex/get-states').then(
+            function(response) {
+
+                $('#' + container + ' .state-data').empty();
+                $('#' + container + ' .state-data').append('<option value="S">Seleccionar</option>');
+
+                response.data.forEach(function(element) {
+                    $('#' + container + ' .state-data').append('<option value="' + element.state + '">' + element.state + '</option>');
+                });
+
+                $('#' + container + ' .state-data').val(state);
+
+            },
+            function(xhrObj, textStatus, err) {
+                alert(err);
+            });
+    },
+    getLocationsByStateLocation: function(container, state, municipio) {
+
+        $('#' + container + ' .location-data').removeAttr("disabled");
+
+        const data = {
+            state: state,
+        }
+
+        RequestObject.AjaxJson('POST', 'sepomex/get-location-by-state', data).then(
+            function(response) {
+
+                $('#' + container + ' .location-data').empty();
+                $('#' + container + ' .location-data').append('<option value="S">Seleccionar</option>');
+
+                $('#' + container + ' .colony-data').empty();
+                $('#' + container + ' .colony-data').append('<option value="S">Seleccionar</option>');
+
+                $('#' + container + ' .sepomex-id').val('');
+                $('#' + container + ' .zip-code').val('');
+
+                response.data.forEach(function(element) {
+                    $('#' + container + ' .location-data').append('<option value="' + element.location + '">' + element.location + '</option>');
+                });
+
+                if (municipio != '') {
+                    $('#' + container + ' .location-data').val(municipio);
+                }
+            },
+            function(xhrObj, textStatus, err) {
+                $('#' + container + ' .location-data').empty();
+                $('#' + container + ' .location-data').append('<option value="S">Seleccionar</option>');
+                $('#' + container + ' .colony-data').empty();
+                $('#' + container + ' .colony-data').append('<option value="S">Seleccionar</option>');
+            });
+    },
 }
 
 /*

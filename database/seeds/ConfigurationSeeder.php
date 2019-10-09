@@ -16,10 +16,10 @@ class ConfigurationSeeder extends Seeder
         //se trunca la tabla
         Configurations::truncate();
         $configurations = [
-            ["key" => "Color del sistema", "alias" => "color_system", "value" => "", "type" => "color", "required" => "1", "visible" => "1", "text_lenght" => "0"],
-            ["key" => "Imagen de fondo", "alias" => "img_system", "value" => "", "type" => "file", "required" => "1", "visible" => "1", "text_lenght" => "0"],
-            ["key" => "Nombre del sistema", "alias" => "name_system", "value" => "", "type" => "text", "required" => "1", "visible" => "1", "text_lenght" => "0"],
-            ["key" => "Logo del sistema", "alias" => "logo_system", "value" => "", "type" => "file", "required" => "1", "visible" => "1", "text_lenght" => "0"],
+            ["key" => "Color del sistema", "alias" => "color_system", "value" => "#2c304d", "type" => "color", "required" => "1", "visible" => "1", "text_lenght" => "0"],
+            ["key" => "Imagen de fondo", "alias" => "img_system", "value" => asset('assets/img/logo.png'), "type" => "file", "required" => "1", "visible" => "1", "text_lenght" => "0"],
+            ["key" => "Nombre del sistema", "alias" => "name_system", "value" => "Nombre del sistema", "type" => "text", "required" => "1", "visible" => "1", "text_lenght" => "0"],
+            ["key" => "Logo del sistema", "alias" => "logo_system", "value" => asset('assets/img/logo.png'), "type" => "file", "required" => "1", "visible" => "1", "text_lenght" => "0"],
         ];
 
         foreach ($configurations as $configuration) {

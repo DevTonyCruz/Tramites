@@ -28,6 +28,10 @@ class Directorio extends Model
         return $this->hasOne('App\Models\Sepomex', 'id', 'sepomex_id_politico');
     }
 
+    public function relacion_directorios(){        
+        return $this->hasMany('App\Models\Relation_events_directory', 'id_directorio', 'id');
+    }
+
     public function fullName()
     {
         $nombre = $this->nombre . ' ' . $this->appaterno . ' ' . $this->apmaterno;

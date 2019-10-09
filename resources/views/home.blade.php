@@ -39,11 +39,11 @@
             </a>
         </div>
         <div class="col-xl-4 col-md-6">
-            <a href="{{ url('/tramites') }}" class="w-100">
+            <a href="{{ url('/registros') }}" class="w-100">
                 <div class="widget widget-23 bg-gradient-08 d-flex justify-content-center align-items-center">
                     <div class="widget-body text-center">
                         <i class="ti ti-list text-light"></i>
-                        <div class="title">MÓDULO 3</div>
+                        <div class="title">REGISTRO NOMINAL</div>
                     </div>
                 </div>
             </a>

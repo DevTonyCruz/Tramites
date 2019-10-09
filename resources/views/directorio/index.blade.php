@@ -20,18 +20,18 @@
     <div class="row flex-row">
         <div class="col-xl-2 col-md-4 col-sm-12" title="Agregar registro">
             <a href="{{ Route('directorio.create') }}" class="w-100">
-            <div class="widget widget-12 bg-gradient-07 has-shadow">
-                <div class="widget-body">
-                    <div class="media d-block">
-                        <div class="align-self-center m-auto text-center">
-                            <i class="ion-plus-round text-white"></i>
-                        </div>
-                        <div class="media-body align-self-center text-center">
-                            <div class="title text-white">Agregar registro</div>
+                <div class="widget widget-12 bg-gradient-07 has-shadow">
+                    <div class="widget-body">
+                        <div class="media d-block">
+                            <div class="align-self-center m-auto text-center">
+                                <i class="ion-plus-round text-white"></i>
+                            </div>
+                            <div class="media-body align-self-center text-center">
+                                <div class="title text-white">Agregar registro</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </a>
         </div>
 
@@ -54,38 +54,38 @@
 
         <div class="col-xl-2 col-md-4 col-sm-12" title="Descargar por profesión">
             <a href="javascript:void(0)" class="w-100" data-toggle="modal" data-target="#modal-profesiones">
-            <div class="widget widget-12 bg-gradient-success has-shadow">
-                <div class="widget-body">
-                    <div class="media d-block">
-                        <div class="align-self-center m-auto text-center">
-                            <i class="ion-briefcase text-white"></i>
-                        </div>
-                        <div class="media-body align-self-center text-center">
-                            <div class="title text-white">Descargar por profesión</div>
+                <div class="widget widget-12 bg-gradient-success has-shadow">
+                    <div class="widget-body">
+                        <div class="media d-block">
+                            <div class="align-self-center m-auto text-center">
+                                <i class="ion-briefcase text-white"></i>
+                            </div>
+                            <div class="media-body align-self-center text-center">
+                                <div class="title text-white">Descargar por profesión</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </a>
         </div>
 
         <div class="col-xl-2 col-md-4 col-sm-12" title="Descargar por grupos">
             <a href="javascript:void(0)" class="w-100" data-toggle="modal" data-target="#modal-grupos">
-            <div class="widget widget-12 bg-gradient-dark has-shadow">
-                <div class="widget-body">
-                    <div class="media d-block">
-                        <div class="align-self-center m-auto text-center">
-                            <i class="ion-network text-white"></i>
-                        </div>
-                        <div class="media-body align-self-center text-center">
-                            <div class="title text-white">Descargar por grupos </div>
+                <div class="widget widget-12 bg-gradient-dark has-shadow">
+                    <div class="widget-body">
+                        <div class="media d-block">
+                            <div class="align-self-center m-auto text-center">
+                                <i class="ion-network text-white"></i>
+                            </div>
+                            <div class="media-body align-self-center text-center">
+                                <div class="title text-white">Descargar por grupos </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </a>
         </div>
-</div>
+    </div>
 
     <div class="widget has-shadow">
         <div class="widget-header bordered no-actions d-flex align-items-center">
@@ -108,38 +108,45 @@
                         @foreach ($directorios as $directorio)
                         <tr>
                             <td>{{ $directorio->id }}</td>
-                            <td>{{ $directorio->nombre . ' ' . $directorio->appaterno . ' ' . $directorio->apmaterno }}</td>
+                            <td>{{ $directorio->nombre . ' ' . $directorio->appaterno . ' ' . $directorio->apmaterno }}
+                            </td>
                             @php
-                                $politico = 'NO';
-                                if (
-                                    !is_null($directorio->coordinador_zona) ||
-                                    !is_null($directorio->coordinador_demarcacion) ||
-                                    !is_null($directorio->distrito_politico) ||
-                                    !is_null($directorio->demarcacion_politico) ||
-                                    !is_null($directorio->seccional_politico)
-                                ) {
-                                    $politico = 'SI';
-                                }
+                            $politico = 'NO';
+                            if (
+                            !is_null($directorio->coordinador_zona) ||
+                            !is_null($directorio->coordinador_demarcacion) ||
+                            !is_null($directorio->distrito_politico) ||
+                            !is_null($directorio->demarcacion_politico) ||
+                            !is_null($directorio->seccional_politico)
+                            ) {
+                            $politico = 'SI';
+                            }
                             @endphp
                             <td>{{ $politico }}</td>
                             @php
-                                $profesion = 'Sin profesión';
-                                if($directorio->profesion){
-                                    $profesion = $directorio->profesion->nombre;
-                                }
+                            $profesion = 'Sin profesión';
+                            if($directorio->profesion){
+                            $profesion = $directorio->profesion->nombre;
+                            }
                             @endphp
                             <td>{{ $profesion }}</td>
                             @php
-                                $grupo = 'Sin grupo';
-                                if($directorio->grupo){
-                                    $grupo = $directorio->grupo->nombre;
-                                }
+                            $grupo = 'Sin grupo';
+                            if($directorio->grupos){
+                            $grupo = $directorio->grupos->nombre;
+                            }
                             @endphp
                             <td>{{ $grupo }}</td>
                             <td class="td-actions">
-                                <a href="{{ url('directorio/edit/' . $directorio->id) }}" title="Editar"><i class="la la-edit edit"></i></a >
-                                <a href="javascript:void(0)" onclick = "ObjectForms.FormsAddAction('form_delete', '{{ url('directorio/' . $directorio->id) }}');" title = "Eliminar" >
-                                    <i class = "la la-trash delete" > </i>
+                                <a href="{{ url('directorio/eventos/' . $directorio->id) }}" title="Ver">
+                                    <i class="la la-eye edit"> </i>
+                                </a>
+                                <a href="{{ url('directorio/edit/' . $directorio->id) }}" title="Editar"><i
+                                        class="la la-edit edit"></i></a>
+                                <a href="javascript:void(0)"
+                                    onclick="ObjectForms.FormsAddAction('form_delete', '{{ url('directorio/' . $directorio->id) }}');"
+                                    title="Eliminar">
+                                    <i class="la la-trash delete"> </i>
                                 </a>
                             </td>
                         </tr>
@@ -171,26 +178,26 @@
                     <span class="sr-only">cerrar</span>
                 </button>
             </div>
-                <form action="{{ route('directorio.exportProfesiones') }}" method="POST">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="form-row align-items-center">
-                            <div class="col-12">
-                                <label class="sr-only" for="inlineFormInput">Profesión</label>
-                                <select name="profesion_id" id="profesion_id" class="form-control">
-                                    <option value="S" selected disabled>Seleccionar profesión</option>
-                                    <option value="0">Todos</option>
-                                    @foreach ($profesiones as $profesion)
-                                        <option value="{{ $profesion->id }}">{{ $profesion->nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+            <form action="{{ route('directorio.exportProfesiones') }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-row align-items-center">
+                        <div class="col-12">
+                            <label class="sr-only" for="inlineFormInput">Profesión</label>
+                            <select name="profesion_id" id="profesion_id" class="form-control">
+                                <option value="S" selected disabled>Seleccionar profesión</option>
+                                <option value="0">Todos</option>
+                                @foreach ($profesiones as $profesion)
+                                <option value="{{ $profesion->id }}">{{ $profesion->nombre }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-shadow" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Exportar</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-shadow" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Exportar</button>
+                </div>
             </form>
         </div>
     </div>
@@ -206,26 +213,26 @@
                     <span class="sr-only">cerrar</span>
                 </button>
             </div>
-                <form action="{{ route('directorio.exportGrupos') }}" method="POST">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="form-row align-items-center">
-                            <div class="col-12">
-                                <label class="sr-only" for="inlineFormInput">Grupos</label>
-                                <select name="grupo_id" id="grupo_id" class="form-control">
-                                    <option value="S" selected disabled>Seleccionar Grupos</option>
-                                    <option value="0">Todos</option>
-                                    @foreach ($grupos as $grupo)
-                                        <option value="{{ $grupo->id }}">{{ $grupo->nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+            <form action="{{ route('directorio.exportGrupos') }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-row align-items-center">
+                        <div class="col-12">
+                            <label class="sr-only" for="inlineFormInput">Grupos</label>
+                            <select name="grupo_id" id="grupo_id" class="form-control">
+                                <option value="S" selected disabled>Seleccionar Grupos</option>
+                                <option value="0">Todos</option>
+                                @foreach ($grupos as $grupo)
+                                <option value="{{ $grupo->id }}">{{ $grupo->nombre }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-shadow" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Exportar</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-shadow" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Exportar</button>
+                </div>
             </form>
         </div>
     </div>

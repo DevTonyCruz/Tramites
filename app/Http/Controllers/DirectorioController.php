@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Directorio;
 use App\Models\Profesiones;
 use App\Models\Grupos;
+use App\Models\Relation_events_groups;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use Illuminate\Database\QueryException;
@@ -292,11 +293,17 @@ class DirectorioController extends Controller
 
             $date = Carbon::now();
             $anio = $date->format('Y');
-            $fecha_profesion = Carbon::parse($directorio->profesion->dia . '-' . $directorio->profesion->mes . '-' . $anio);
+            
+            $fecha_profesion = '';
+            if(!is_null($directorio->profesion) > 0){
+                $fecha_profesion = Carbon::parse($directorio->profesion->dia . '-' . $directorio->profesion->mes . '-' . $anio);
+                $fecha_profesion = $this->next_dates($fecha_profesion);
+            }else{
+                $fecha_profesion = false;
+            }
             $fecha_contacto = $this->next_dates($fecha_contacto);
             $fecha_nacimiento = $this->next_dates($fecha_nacimiento);
             $fecha_importante = $this->next_dates($fecha_importante);
-            $fecha_profesion = $this->next_dates($fecha_profesion);
             if (($fecha_contacto !== false) || ($fecha_nacimiento !== false) || ($fecha_importante !== false) || ($fecha_profesion !== false)) {
 
                 $datos = [
@@ -312,6 +319,7 @@ class DirectorioController extends Controller
                 array_push($fechas, $datos);
             }
         }
+        
         return view('directorio.alertas', [
             "fechas" => $fechas
         ]);
@@ -332,5 +340,21 @@ class DirectorioController extends Controller
             return Carbon::parse($date)->format('d-m-Y');
         }
         return false;
+    }
+
+    public function eventos($id){
+        $directorio = Directorio::where('id', $id)->first();
+        $relacion_grupos = Relation_events_groups::where('id_grupo', $directorio->id_grupos)->get();
+
+        $asisitio = [];
+        foreach($directorio->relacion_directorios as $asistencia){
+            array_push($asisitio, $asistencia->id_evento);
+        }
+
+        return view('directorio.eventos', [
+            "directorio" => $directorio,
+            "relacion_grupos" => $relacion_grupos,
+            "asisitio" => $asisitio,
+        ]);
     }
 }

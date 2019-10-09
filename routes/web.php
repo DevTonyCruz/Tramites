@@ -131,6 +131,7 @@ Route::group(['prefix' => 'directorio', 'middleware' => ['auth', 'permission']],
     Route::get('/alertas',      'DirectorioController@alertas')->name('directorio.alertas');
     Route::post('/export-profesiones', 'DirectorioController@exportProfesiones')->name('directorio.exportProfesiones');
     Route::post('/export-grupos', 'DirectorioController@exportGrupos')->name('directorio.exportGrupos');
+    Route::get('/eventos/{id}', 'DirectorioController@eventos')->name('directorio.eventos');
 });
 
 
@@ -149,4 +150,13 @@ Route::group(['prefix' => 'configuration', 'middleware' => ['auth', 'permission'
     Route::get('/{id}/edit', 'ConfigurationController@edit')->name('configuration.edit');
     Route::put('/{id}', 'ConfigurationController@update')->name('configuration.update');
     Route::put('/status/{id}', 'ConfigurationController@status')->name('configuration.status');
+});
+
+Route::group(['prefix' => 'eventos', 'middleware' => ['auth', 'permission']], function () {
+    Route::get('/',             'EventoController@index')->name('evento.index');
+    Route::get('/create',       'EventoController@create')->name('evento.create');
+    Route::post('/',            'EventoController@store')->name('evento.store');
+    Route::get('/edit/{id}',    'EventoController@edit')->name('evento.edit');
+    Route::put('/{id}',         'EventoController@update')->name('evento.update');
+    Route::delete('/{id}',      'EventoController@destroy')->name('evento.destroy');
 });

@@ -31,3 +31,5 @@ Route::group(['prefix' => 'list'], function () {
     Route::get('fechas','FechasController@list')->name('fechas.list');
     Route::get('directorio','DirectorioController@list')->name('directorio.list');
 });
+
+Route::post('asistencias', 'EventoController@asistencia')->name('evento.asistencia');

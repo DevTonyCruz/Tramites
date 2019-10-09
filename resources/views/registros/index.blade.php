@@ -20,21 +20,38 @@
     <div class="row flex-row">
         <div class="col-xl-2 col-md-4 col-sm-12" title="Agregar registro">
             <a href="{{ Route('registros.create') }}" class="w-100">
-            <div class="widget widget-12 bg-gradient-07 has-shadow">
-                <div class="widget-body">
-                    <div class="media d-block">
-                        <div class="align-self-center m-auto text-center">
-                            <i class="ion-plus-round text-white"></i>
-                        </div>
-                        <div class="media-body align-self-center text-center">
-                            <div class="title text-white">Agregar registro</div>
+                <div class="widget widget-12 bg-gradient-07 has-shadow">
+                    <div class="widget-body">
+                        <div class="media d-block">
+                            <div class="align-self-center m-auto text-center">
+                                <i class="ion-plus-round text-white"></i>
+                            </div>
+                            <div class="media-body align-self-center text-center">
+                                <div class="title text-white">Agregar registro</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </a>
         </div>
-</div>
+
+        <div class="col-xl-2 col-md-4 col-sm-12" title="Filtrar registros">
+            <a href="javascript:void(0)" class="w-100" data-toggle="modal" data-target="#modal-filtros">
+                <div class="widget widget-12 bg-gradient-dark has-shadow">
+                    <div class="widget-body">
+                        <div class="media d-block">
+                            <div class="align-self-center m-auto text-center">
+                                <i class="ion-network text-white"></i>
+                            </div>
+                            <div class="media-body align-self-center text-center">
+                                <div class="title text-white">Filtrar registros</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
 
     <div class="widget has-shadow">
         <div class="widget-header bordered no-actions d-flex align-items-center">
@@ -58,14 +75,18 @@
                         <tr>
                             <td>{{ $registro->id }}</td>
                             <td>{{ $registro->clave }}</td>
-                            <td>{{ $registro->nombre . ' ' . $registro->apellido_paterno . ' ' . $registro->apellido_materno }}</td>
+                            <td>{{ $registro->nombre . ' ' . $registro->apellido_paterno . ' ' . $registro->apellido_materno }}
+                            </td>
                             <td>{{ $registro->codigo_postal }}</td>
                             <td>{{ $registro->geo_referencia }}</td>
                             <td class="td-actions">
-                                <a href="{{ url('registros/edit/' . $registro->id) }}" title="Editar"><i class="la la-edit edit"></i></a >
-                                <a href="javascript:void(0)" onclick = "ObjectForms.FormsAddAction('form_delete', '{{ url('registros/' . $registro->id) }}');" title = "Eliminar" >
-                                    <i class = "la la-trash delete" > </i>
-                                </a>
+                                <a href="{{ url('registros/edit/' . $registro->id) }}" title="Editar"><i
+                                        class="la la-edit edit"></i></a>
+                                <!--<a href="javascript:void(0)"
+                                    onclick="ObjectForms.FormsAddAction('form_delete', '{{ url('registros/' . $registro->id) }}');"
+                                    title="Eliminar">
+                                    <i class="la la-trash delete"> </i>
+                                </a>-->
                             </td>
                         </tr>
                         @endforeach
@@ -76,6 +97,54 @@
     </div>
 </div>
 
+
+<div id="modal-filtros" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Filtrar registros</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">cerrar</span>
+                </button>
+            </div>
+            <form action="{{ route('registros.index') }}" method="GET">
+                <div class="modal-body">
+                    <div class="form-row align-items-center">
+                        <div class="col-12 mb-2">
+                            <input type="text" id="nombre_filtro" name="nombre_filtro" placeholder="Ingrese un nombre"
+                                class="form-control">
+                        </div>
+                        <div class="col-12 mb-2">
+                            <input type="text" id="appat_filtro" name="appat_filtro"
+                                placeholder="Ingrese un apellido paterno" class="form-control">
+                        </div>
+                        <div class="col-12 mb-2">
+                            <input type="text" id="apmat_filtro" name="apmat_filtro"
+                                placeholder="Ingrese un apellido materno" class="form-control">
+                        </div>
+                        <div class="col-12 mb-2">
+                            <input type="text" id="colonia_filtro" name="colonia_filtro"
+                                placeholder="Ingrese una colonia" class="form-control">
+                        </div>
+                        <div class="col-6 mb-2">
+                            <input type="text" id="distrito_filtro" name="distrito_filtro"
+                                placeholder="Ingrese un distrito" class="form-control">
+                        </div>
+                        <div class="col-6 mb-2">
+                            <input type="text" id="seccion_filtro" name="seccion_filtro"
+                                placeholder="Ingrese una sección" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-shadow" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <form method="POST" id="form_delete" class="inline" action="">
     @method('DELETE')
     @csrf

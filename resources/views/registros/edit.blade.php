@@ -44,7 +44,8 @@
                                                     class="text-danger ml-2">*</span></label>
                                             <input type="text" id="nombre" name="nombre"
                                                 class="form-control{{ $errors->has('nombre') ? ' has-error' : '' }}"
-                                                placeholder="Ingrese su nombre" value="{{ $registro->nombre }}" required>
+                                                placeholder="Ingrese su nombre" value="{{ $registro->nombre }}"
+                                                required>
                                             @if ($errors->has('nombre'))
                                             <span class="invalid-feedback d-block" role="alert">
                                                 <strong>{{ $errors->first('nombre') }}</strong>
@@ -66,7 +67,8 @@
                                             @endif
                                         </div>
                                         <div class="col-xl-4 mb-3">
-                                            <label class="form-control-label">Apellido materno</label>
+                                            <label class="form-control-label">Apellido materno<span
+                                                    class="text-danger ml-2">*</span></label>
                                             <input type="text" id="apellido_materno" name="apellido_materno"
                                                 class="form-control{{ $errors->has('apellido_materno') ? ' has-error' : '' }}"
                                                 placeholder="Ingrese su apellido materno"
@@ -78,8 +80,7 @@
                                             @endif
                                         </div>
                                         <div class="col-xl-4 mb-3">
-                                            <label class="form-control-label">Sexo<span
-                                                    class="text-danger ml-2">*</span></label>
+                                            <label class="form-control-label">Sexo</label>
                                             <select class="form-control" id="sexo" name="sexo">
                                                 <option value="S" disabled>
                                                     Seleccionar</option>
@@ -94,7 +95,7 @@
                                             <input type="text" id="clave" name="clave"
                                                 class="form-control{{ $errors->has('clave') ? ' has-error' : '' }}"
                                                 placeholder="Ingrese la clave del registro"
-                                                value="{{ $registro->clave }}" >
+                                                value="{{ $registro->clave }}">
                                             @if ($errors->has('clave'))
                                             <span class="invalid-feedback d-block" role="alert">
                                                 <strong>{{ $errors->first('clave') }}</strong>
@@ -110,7 +111,7 @@
                                                 <input type="text" id="email" name="email"
                                                     class="form-control{{ $errors->has('email') ? ' has-error' : '' }}"
                                                     placeholder="Ingrese su correo electrónico"
-                                                    value="{{ $registro->correo }}" >
+                                                    value="{{ $registro->correo }}">
                                                 @if ($errors->has('email'))
                                                 <span class="invalid-feedback d-block" role="alert">
                                                     <strong>{{ $errors->first('email') }}</strong>
@@ -135,8 +136,7 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-4 mb-3">
-                                            <label class="form-control-label">Fecha de nacimiento<span
-                                                    class="text-danger ml-2">*</span></label>
+                                            <label class="form-control-label">Fecha de nacimiento</label>
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon addon-secondary">
@@ -160,7 +160,7 @@
                                             <input type="text" id="lugar_nacimiento" name="lugar_nacimiento"
                                                 class="form-control{{ $errors->has('lugar_nacimiento') ? ' has-error' : '' }}"
                                                 placeholder="Ingrese algún pasatiempo"
-                                                value="{{ $registro->lugar_nacimiento }}" >
+                                                value="{{ $registro->lugar_nacimiento }}">
                                             @if ($errors->has('lugar_nacimiento'))
                                             <span class="invalid-feedback d-block" role="alert">
                                                 <strong>{{ $errors->first('lugar_nacimiento') }}</strong>
@@ -230,8 +230,7 @@
                                     <div id="registros">
                                         <div class="form-group row mb-3">
                                             <div class="col-xl-6 mb-3">
-                                                <label class="form-control-label">Calle<span
-                                                        class="text-danger ml-2">*</span></label>
+                                                <label class="form-control-label">Calle</label>
                                                 <input type="text" id="calle" name="calle"
                                                     class="form-control{{ $errors->has('calle') ? ' has-error' : '' }}"
                                                     placeholder="Ingrese una calle" value="{{ $registro->calle }}">
@@ -242,11 +241,10 @@
                                                 @endif
                                             </div>
                                             <div class="col-xl-2 mb-3">
-                                                <label class="form-control-label">Núm. Exterior<span
-                                                        class="text-danger ml-2">*</span></label>
+                                                <label class="form-control-label">Núm. Exterior</label>
                                                 <input type="text" id="num_ext" name="num_ext"
                                                     class="form-control{{ $errors->has('num_ext') ? ' has-error' : '' }}"
-                                                    placeholder="Num. num_ext" value="{{ $registro->num_ext }}">
+                                                    placeholder="Num. Exterior" value="{{ $registro->num_ext }}">
                                                 @if ($errors->has('num_ext'))
                                                 <span class="invalid-feedback d-block" role="alert">
                                                     <strong>{{ $errors->first('num_ext') }}</strong>
@@ -257,7 +255,7 @@
                                                 <label class="form-control-label">Núm. Interior</label>
                                                 <input type="text" id="num_int" name="num_int"
                                                     class="form-control{{ $errors->has('num_int') ? ' has-error' : '' }}"
-                                                    placeholder="Núm. num_int" value="{{ $registro->num_int }}">
+                                                    placeholder="Núm. Interior" value="{{ $registro->num_int }}">
                                                 @if ($errors->has('num_int'))
                                                 <span class="invalid-feedback d-block" role="alert">
                                                     <strong>{{ $errors->first('num_int') }}</strong>
@@ -265,8 +263,7 @@
                                                 @endif
                                             </div>
                                             <div class="col-xl-2 mb-3">
-                                                <label class="form-control-label">Código Postal<span
-                                                        class="text-danger ml-2">*</span></label>
+                                                <label class="form-control-label">Código Postal</label>
                                                 <input type="text" id="codigo_postal" name="codigo_postal"
                                                     class="form-control{{ $errors->has('codigo_postal') ? ' has-error' : '' }}"
                                                     placeholder="Ingrese el código postal"
@@ -280,23 +277,7 @@
                                         </div>
                                         <div class="form-group row mb-3">
                                             <div class="col-xl-4 mb-3">
-                                                <label class="form-control-label">Estado<span
-                                                        class="text-danger ml-2">*</span></label>
-                                                <select class="form-control state-data" id="state" name="state"
-                                                    onchange="SepomexObject.getLocation('registros', this.value);"
-                                                    require>
-                                                </select>
-                                            </div>
-                                            <div class="col-xl-4 mb-3">
-                                                <label class="form-control-label">Municipio<span
-                                                        class="text-danger ml-2">*</span></label>
-                                                <select class="form-control location-data" id="city" name="city"
-                                                    disabled require>
-                                                </select>
-                                            </div>
-                                            <div class="col-xl-4 mb-3">
-                                                <label class="form-control-label">Colonia<span
-                                                        class="text-danger ml-2">*</span></label>
+                                                <label class="form-control-label">Colonia</label>
                                                 <input type="text" id="colonia" name="colonia"
                                                     class="form-control{{ $errors->has('colonia') ? ' has-error' : '' }}"
                                                     placeholder="Ingrese una colonia" value="{{ $registro->colonia }}">
@@ -306,59 +287,46 @@
                                                 </span>
                                                 @endif
                                             </div>
-                                            <div class="col-xl-2 mb-3">
-                                                <label class="form-control-label">Código del entidad<span
-                                                        class="text-danger ml-2">*</span></label>
-                                                <input type="text" id="entidad" name="entidad"
-                                                    class="form-control{{ $errors->has('entidad') ? ' has-error' : '' }}"
-                                                    placeholder="Ingrese el código de la entidad"
-                                                    value="{{ $registro->entidad }}">
-                                                @if ($errors->has('entidad'))
-                                                <span class="invalid-feedback d-block" role="alert">
-                                                    <strong>{{ $errors->first('entidad') }}</strong>
-                                                </span>
-                                                @endif
+                                            <div class="col-xl-4 mb-3">
+                                                <label class="form-control-label">Estado</label>
+                                                <select class="form-control state-data" id="state" name="state"
+                                                    onchange="SepomexObject.getLocation('registros', this.value);">
+                                                </select>
                                             </div>
-                                            <div class="col-xl-2 mb-3">
+                                            <div class="col-xl-4 mb-3">
+                                                <label class="form-control-label">Municipio</label>
+                                                <select class="form-control location-data" id="city" name="city"
+                                                    disabled>
+                                                </select>
+                                            </div>
+                                            <div class="col-xl-3 mb-3">
                                                 <label class="form-control-label">Distrito<span
                                                         class="text-danger ml-2">*</span></label>
                                                 <input type="text" id="distrito" name="distrito"
                                                     class="form-control{{ $errors->has('distrito') ? ' has-error' : '' }}"
-                                                    placeholder="Ingrese el distrito" value="{{ $registro->distrito }}" required>
+                                                    placeholder="Ingrese el distrito" value="{{ $registro->distrito }}"
+                                                    required>
                                                 @if ($errors->has('distrito'))
                                                 <span class="invalid-feedback d-block" role="alert">
                                                     <strong>{{ $errors->first('distrito') }}</strong>
                                                 </span>
                                                 @endif
                                             </div>
-                                            <div class="col-xl-2 mb-3">
-                                                <label class="form-control-label">Código del municipio<span
-                                                        class="text-danger ml-2">*</span></label>
-                                                <input type="text" id="municipio" name="municipio"
-                                                    class="form-control{{ $errors->has('municipio') ? ' has-error' : '' }}"
-                                                    placeholder="Ingrese el código del municipio"
-                                                    value="{{ $registro->municipio }}">
-                                                @if ($errors->has('municipio'))
-                                                <span class="invalid-feedback d-block" role="alert">
-                                                    <strong>{{ $errors->first('municipio') }}</strong>
-                                                </span>
-                                                @endif
-                                            </div>
-                                            <div class="col-xl-2 mb-3">
+                                            <div class="col-xl-3 mb-3">
                                                 <label class="form-control-label">Sección<span
                                                         class="text-danger ml-2">*</span></label>
                                                 <input type="text" id="seccion" name="seccion"
                                                     class="form-control{{ $errors->has('seccion') ? ' has-error' : '' }}"
-                                                    placeholder="Ingrese la sección" value="{{ $registro->seccion }}" required>
+                                                    placeholder="Ingrese la sección" value="{{ $registro->seccion }}"
+                                                    required>
                                                 @if ($errors->has('seccion'))
                                                 <span class="invalid-feedback d-block" role="alert">
                                                     <strong>{{ $errors->first('seccion') }}</strong>
                                                 </span>
                                                 @endif
                                             </div>
-                                            <div class="col-xl-2 mb-3">
-                                                <label class="form-control-label">Código de la localidad<span
-                                                        class="text-danger ml-2">*</span></label>
+                                            <div class="col-xl-3 mb-3">
+                                                <label class="form-control-label">Código de la localidad</label>
                                                 <input type="text" id="localidad" name="localidad"
                                                     class="form-control{{ $errors->has('localidad') ? ' has-error' : '' }}"
                                                     placeholder="Ingrese el código de la localidad"
@@ -369,9 +337,8 @@
                                                 </span>
                                                 @endif
                                             </div>
-                                            <div class="col-xl-2 mb-3">
-                                                <label class="form-control-label">Manzana<span
-                                                        class="text-danger ml-2">*</span></label>
+                                            <div class="col-xl-3 mb-3">
+                                                <label class="form-control-label">Manzana</label>
                                                 <input type="text" id="manzana" name="manzana"
                                                     class="form-control{{ $errors->has('manzana') ? ' has-error' : '' }}"
                                                     placeholder="Ingrese la manzana" value="{{ $registro->manzana }}">
@@ -391,16 +358,41 @@
                                     <div class="form-group row mb-3">
                                         <div class="col-xl-4 mb-3">
                                             <label for="simpatizante" class="form-control-label">Simpatizante</label>
-                                            <input type="text" id="simpatizante" name="simpatizante"
+                                            <select
                                                 class="form-control{{ $errors->has('simpatizante') ? ' has-error' : '' }}"
-                                                placeholder="Ingrese un simpatizante"
-                                                value="{{ $registro->simpatizante }}" >
+                                                id="simpatizante" name="simpatizante">
+                                                <option value="S" disabled>
+                                                    Seleccionar</option>
+                                                <option value="S"
+                                                    {{ ($registro->simpatizante == 'S') ? 'selected' : '' }}>
+                                                    Si</option>
+                                                <option value="N"
+                                                    {{ ($registro->simpatizante == 'N') ? 'selected' : '' }}>
+                                                    No</option>
+                                            </select>
                                             @if ($errors->has('simpatizante'))
                                             <span class="invalid-feedback d-block" role="alert">
                                                 <strong>{{ $errors->first('simpatizante') }}</strong>
                                             </span>
                                             @endif
                                         </div>
+                                        <div class="col-xl-4 mb-3">
+                                            <label class="form-control-label">Demarcación</label>
+                                            <input type="text" id="demarcacion" name="demarcacion"
+                                                class="form-control{{ $errors->has('demarcacion') ? ' has-error' : '' }}"
+                                                placeholder="Ingrese la demarcación"
+                                                value="{{ $registro->demarcacion }}">
+                                            @if ($errors->has('demarcacion'))
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $errors->first('demarcacion') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="em-separator separator-dashed"></div>
+                                    <div class="text-right">
+                                        <button class="btn btn-gradient-01" type="submit">Editar</button>
                                     </div>
                                 </form>
                             </div>
@@ -432,11 +424,18 @@
         $("#form-registros").submit();
     })
 
-    SepomexObject.getStates('registros');
-    SepomexObject.getLocation('registros', 'Nayarit', 'Tepic');
+    $(document).ready(function(){
+        @if(is_null($registro->entidad))
+            SepomexObject.getStates('registros');
+            SepomexObject.getLocation('registros', 'Nayarit', 'Tepic');
+        @else
+            SepomexObject.getStatesByState('registros', '{{ $registro->estado->state }}');
+            SepomexObject.getLocationsByStateLocation('registros', '{{ $registro->estado->state }}', '{{ $registro->municipio_s->location }}');
+        @endif
+    });
 
     $(document).ready(function(){
-        $('#phone').mask('00-00-00-00-00');
+        $('#phone').mask('0000000000');
     });
 </script>
 @endsection
